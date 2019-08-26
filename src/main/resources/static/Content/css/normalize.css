@@ -1,0 +1,146 @@
+/* è¿™ä¸ªCSSæ˜¯ç”¨äºŽé‡ç½®ä¸€äº›æµè§ˆå™¨å·®å¼‚ by heyao*/
+
+
+/* Document
+   ========================================================================== */
+
+html,
+input,
+textarea,
+keygen,
+select,
+button {
+    font-family: "å¾®è½¯é›…é»‘";
+    -ms-text-size-adjust: 100%;
+    /* 2 */
+    -webkit-text-size-adjust: 100%;
+    /* 2 */
+}
+
+ol,ul {
+    padding: 0;
+    margin: 0;
+}
+ol li,
+ul li {
+    list-style: none;
+}
+
+a,
+a:hover,
+a:visited,
+a:link,
+a:active {
+    text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+p,
+blockquote,
+table,
+th,
+td,
+embed,
+object {
+    padding: 0;
+    margin: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+fieldset,
+img,
+abbr {
+    border: 0;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+th,
+var {
+    font-weight: normal;
+    font-style: normal;
+}
+
+ul,ol {
+    list-style: none;
+}
+
+caption,
+th {
+    text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 1.0em;
+}
+h1{
+    font-size: 24px;
+    padding: 27px 0;
+}
+h2{
+    font-size: 20px;
+}
+q:before,
+q:after {
+    content: â€;
+}
+
+a,
+ins {
+    text-decoration: none;
+}
+a{
+    cursor: pointer;
+}
+input{
+    vertical-align:middle;
+    display: inline-block;
+    white-space: nowrap;
+    margin: 0;
+}
+input[type="button"]{
+    cursor: pointer;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}

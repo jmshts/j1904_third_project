@@ -1,0 +1,692 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/Content/css/normalize.css">
+    <link rel="stylesheet" href="/Content/css/base.css">
+    <link rel="stylesheet" href="/Content/css/basecolor.css">
+    <link rel="stylesheet" href="/Content/css/animate.css">
+    <script src="/Scripts/jquery-1.8.2.js"></script>
+    <script src="/Scripts/jQuery.md5.js"></script>
+    <script src="/Scripts/nav-bar.js"></script>
+    <script src="/Scripts/dialog.js"></script>
+    <script src="/Scripts/page.js"></script>
+    <script src="/Scripts/HB.Framework.js"></script>
+    
+    <script src="/Scripts/WdatePicker.js"></script><link href="/Scripts/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+    <script src="/Scripts/public.js"></script>
+    <script src="/Scripts/HB.Regular.js"></script>
+    <script src="/Scripts/publicModel.js"></script>
+    <script src="/Scripts/OrgConfig.js"></script>
+    <title>首页</title>
+
+    <script type="text/javascript">
+        var medicalRecord = "0";  //是否启用专病预约标识
+        var weisiteurl = "";        
+        var RegistWay = "1";
+        var booktype = "1";
+        var branchtype = "1";
+        var doctorId = "";
+        var departmentIdMaster = "-1";
+
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = [
+                "Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"
+            ];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        if (!IsPC()) {
+            if (weisiteurl != "") {
+                location.href = weisiteurl; //取消注释并填写微站代码
+            }
+
+        }
+
+        function JumpRegist() {
+            if (RegistWay == "1") {
+                window.location.href = 'Register';
+            } else if (RegistWay == "2") {
+                window.location.href = '/Account/PhoneRegister';
+            } else if (RegistWay == "1,2") {
+                window.location.href = '/Account/PhoneRegister';
+            }
+
+        }        
+    </script>
+    <style>
+        .index-nav .nav-bar .zbhos-depart > ul > li {
+            width: 220px!important;
+        }
+        #zbdepList_doc .depart-depart>span {
+            width: 120px !important;
+        }
+        #zbdepList_doc .depart-depart>ul>li {
+            width: auto!important;
+        }
+    </style>
+<style>#BAIDU_DSPUI_FLOWBAR,.adsbygoogle,.ad,div[class^="ad-widsget"],div[id^="div-gpt-ad-"],a[href*="cpro.baidu.com"],a[href*="@"][href*=".exe"],a[href*="/?/"][href*=".exe"],.adpushwin{display:none!important;max-width:0!important;max-height:0!important;overflow:hidden!important;}</style></head>
+<body>
+    <input type="hidden" id="idc_orgid" value="015d25ea-a9a1-bad2-4a20-c1c388d66557">
+    <input type="hidden" id="idc_channelId" value="00faac31-a9a0-a027-4797-746ebbc98720">
+    <input type="hidden" id="HbManageroot" value="http://1.85.45.235:22123/">
+    <input type="hidden" id="idc_cmsImgUrl" value="http://1.85.45.235:22125/">
+    <input type="hidden" id="HospitalId" value="6101000002">
+    <!--header-->
+    <div class="index-header">
+        <div class="public-contanier">
+            <div class="header-info">
+
+                <a href="/Home/Index">
+
+                </a>
+            </div>
+            <div class="header-function">
+                <div class="header-iflogin">
+                    <label id="personalWelcome" style="display:none;float:left;">
+                        <span>欢迎<a href="/Personal/AppointmentList"><small id="loginNameShow"></small></a></span>
+                        <span><a href="#" onclick="LoginOut()">退出</a></span>
+                    </label>
+                    <a target="_blank" href="http://www.dyyy.xjtu.edu.cn/">返回官网</a> | <a target="_blank" href="http://en.dyyy120.com/">国际诊疗网</a>
+                </div>
+                <div class="header-search">
+                    <div class="search-control">
+                        <div class="search-type">
+                            <div class="select_box">
+                                <span class="select_txt">科室</span>
+                                <input id="select_value" type="hidden" value="search_dep">
+                                <a class="selet_open"><b></b></a>
+                                <div class="option" style="display: none;">
+                                    <a id="search_dep">科室</a>
+                                    <a id="search_doc">医生</a>
+                                </div>
+                            </div>
+                            <br clear="all">
+                        </div>
+                        <div class="search-value">
+                            <input id="searchText" type="text" value="" placeholder="请输入文字" autocomplete="off">
+                        </div>
+                        <div class="btn btn-default search-btn mod_select" onclick="topSearch()">
+                            搜索
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!--nav-->
+    <div class="index-nav">
+        <div class="public-contanier">
+            <div class="nav-bar">
+                <ul class="nav-bar-list">
+                    <li class="actives"><a href="/Home/Index">首页</a></li>
+                    <li id="nav-bar-yuyue">
+                        <a href="/Appointment/HospitalIndex">预约挂号</a>
+                        <div class="drop-down">
+                            <ul>
+                                <li>
+                                    <span>
+                                        <a class="public-hover-nav" href="/Appointment/DepartSchedule">
+                                            按科室预约
+                                        </a>
+                                    </span>
+                                    <div class="nav-box nav-bar-list-hos">
+                                        <div class="hos-title" style="margin-top: -10px;">
+                                            <div id="orgArea_dep" class="hos-box"></div>
+                                        </div>
+                                        <div class="hos-depart">
+                                            <ul id="depList_dep"><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=0459b097-ba04-4bf9-bd6b-51bb0448d402'"><span title="癌症肿瘤多学科（MDT）门诊">癌症肿瘤多学...</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=6b69b95a-47b2-47d4-a494-28b9b5237749'"><span title="产科门诊">产科门诊</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=fe9634bd-9a30-4b82-864a-05343b94ec59'"><span title="超声科门诊">超声科门诊</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=6dd967ca-31b7-4933-9024-6ebd8cf2eaf5'"><span title="耳鼻喉科门诊">耳鼻喉科门诊</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=c89c268a-0c6f-47ff-a0eb-faec19a422af'"><span title="儿保门诊">儿保门诊</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=6e20499b-aa17-4741-b8da-8c2a86a1ccf2'"><span title="儿科门诊">儿科门诊</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=9881eede-87d6-4d9d-913f-d4ac462e541f'"><span title="妇科门诊">妇科门诊</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=0b601aa7-ce04-43e2-9691-2cc1f1be0d6a'"><span title="腹膜透析室门诊">腹膜透析室门诊</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=83a3e038-521d-4c97-9ccf-e382cf469887'"><span title="发热门诊">发热门诊</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=4a854349-b1c6-4487-9b7f-89b91a56b3a4'"><span title="风湿科门诊">风湿科门诊</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=ab16f950-76db-4898-a2cb-c985960f6fd6'"><span title="肝胆外科门诊">肝胆外科门诊</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=38925940-514b-4b99-823b-8bc18412ce4b'"><span title="国际诊疗部/特需">国际诊疗部/...</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=9764c3e4-5b66-4663-9940-57f265323610'"><span title="感染科门诊">感染科门诊</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=b8788f4a-fe8f-4a6c-8c3d-1e5e9288a390'"><span title="骨外科门诊">骨外科门诊</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=26006cf5-84ad-426e-b2c1-0d33b7d924cd'"><span title="呼吸内科门诊">呼吸内科门诊</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=dd48ddd7-e7e4-44c2-be13-305920a106c1'"><span title="核医学科门诊">核医学科门诊</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=221add32-529f-43b6-b0bf-436388c8a960'"><span title="健康免疫咨询门诊">健康免疫咨询...</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=ca3b08bf-4ee6-4ed8-ba92-ff45f6ddea2b'"><span title="精神心理卫生门诊">精神心理卫生...</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=0f28fcee-5a22-4fd7-bbbe-3cbd809c476f'"><span title="康复科门诊(兴善)">康复科门诊(...</span></li><li onclick="window.location.href = '../Appointment/DepartmentIndex?DepartmentId=e33c6175-8acb-4d9e-abcc-c322654f7d6e'"><span title="康复评定兴善门诊">康复评定兴善...</span></li></ul>
+                                        </div>
+                                        <div class="nav-more">
+                                            <a class="public-hover" href="/Appointment/DepartSchedule">
+                                                更多&gt;&gt;
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <span>
+                                        <a class="public-hover-nav" href="/Appointment/DocSchedule">
+                                            按医生预约
+                                        </a>
+                                    </span>
+                                    <div class="nav-box nav-bar-list-depart">
+                                        <div class="depart-title" style="margin-top: -10px;">
+                                            <div id="orgArea_doc" class="depart-box"></div>
+                                        </div>
+                                        <div id="depList_doc"><div class="depart-depart"><span title="癌症肿瘤多学科（MDT）门诊">癌症肿瘤多学...</span><ul></ul></div><div class="depart-depart"><span title="产科门诊">产科门诊</span><ul><li onclick="window.location.href = '../Appointment/DoctorIndex?DoctorId=00d485b4-a9a2-a7e4-4f82-0b3ff7ded66f'"><span title="白桂芹">白桂芹</span></li><li onclick="window.location.href = '../Appointment/DoctorIndex?DoctorId=00d485a6-a9a2-86fb-4bd0-4a7438daf0ac'"><span title="产科普通">产科普通</span></li><li onclick="window.location.href = '../Appointment/DoctorIndex?DoctorId=00d48594-a9a2-95d1-4284-80cded13920e'"><span title="高峻">高峻</span></li><li onclick="window.location.href = '../Appointment/DoctorIndex?DoctorId=00d48573-a9a2-be35-4316-469c5874bded'"><span title="韩蓁">韩蓁</span></li><li onclick="window.location.href = '../Appointment/DoctorIndex?DoctorId=00d485f1-a9a2-a50b-45bf-7e0047d15051'"><span title="黄谱">黄谱</span></li></ul></div><div class="depart-depart"><span title="超声科门诊">超声科门诊</span><ul></ul></div><div class="depart-depart"><span title="耳鼻喉科门诊">耳鼻喉科门诊</span><ul><li onclick="window.location.href = '../Appointment/DoctorIndex?DoctorId=00d48753-a9a2-8a8c-4828-f74618311fda'"><span title="白艳霞">白艳霞</span></li><li onclick="window.location.href = '../Appointment/DoctorIndex?DoctorId=00d4867e-a9a2-8782-4756-f6cb95aa8029'"><span title="陈阳静">陈阳静</span></li><li onclick="window.location.href = '../Appointment/DoctorIndex?DoctorId=00d4862a-a9a2-a479-4e97-4910e308af90'"><span title="韩鹏">韩鹏</span></li><li onclick="window.location.href = '../Appointment/DoctorIndex?DoctorId=00d4864a-a9a2-8756-4587-4ae272f23df1'"><span title="贾永平">贾永平</span></li><li onclick="window.location.href = '../Appointment/DoctorIndex?DoctorId=00a3ffe8-aa20-9c74-404f-7574f8259200'"><span title="康伟">康伟</span></li></ul></div><div class="depart-depart"><span title="儿保门诊">儿保门诊</span><ul><li onclick="window.location.href = '../Appointment/DoctorIndex?DoctorId=00a6f137-aa39-8556-4fb8-94d9b8d8aacb'"><span title="卡介苗补种">卡介苗补种</span></li><li onclick="window.location.href = '../Appointment/DoctorIndex?DoctorId=00d487a3-a9a2-8dcb-4946-912c1eaaf9a5'"><span title="刘黎明">刘黎明</span></li><li onclick="window.location.href = '../Appointment/DoctorIndex?DoctorId=00d48778-a9a2-a438-439d-eed110acc9f2'"><span title="史晓薇">史晓薇</span></li><li onclick="window.location.href = '../Appointment/DoctorIndex?DoctorId=00d48790-a9a2-a1bd-47ad-f488087dc446'"><span title="帖利军">帖利军</span></li></ul></div></div>
+                                        <div class="nav-more">
+                                            <a class="public-hover" href="/Appointment/DocSchedule">
+                                                更多&gt;&gt;
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li class="J-li-zbyy" style="display: none;">                                   
+                                    <span>
+                                        <a class="public-hover-nav" href="/Appointment/DocScheduleZB">
+                                            按专病预约
+                                        </a>
+                                    </span>
+                                    <div class="nav-box nav-bar-list-depart">
+                                        <div class="depart-title" style="margin-top: -10px;">
+                                            <div id="orgArea_dep2" class="depart-box"></div>
+                                        </div>
+                                        <div id="zbdepList_doc">
+                                        </div>
+                                        <div class="nav-more">
+                                            <a class="public-hover" href="/Appointment/DocScheduleZB">
+                                                更多&gt;&gt;
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>                               
+                               <li class="J-li-jzxz" style="">
+                                    <span><a class="hospital_jzxz" href="/News/NewsListInfo?HospitalId=6101000002&amp;callIndex=jzxz">就诊须知</a></span><a class="hospital_jzxz" href="/News/NewsListInfo?HospitalId=6101000002&amp;callIndex=jzxz">
+                                    </a><div class="nav-box nav-bar-list-clinicmust"><a class="hospital_jzxz" href="/News/NewsListInfo?HospitalId=6101000002&amp;callIndex=jzxz">
+                                        <div class="clinicmust">
+                                            <span id="org_guides"><p style=" ">
+	<br>
+</p>
+<p style=" ">
+	1、预约诊疗采用二代身份证或就诊卡实名预约。
+</p>
+<p style=" ">
+	2、持就诊卡预约成功后，就诊当日按照预约时间直接在就诊科室护士站刷卡排队。若未按照规定时间（可延迟半个小时）前来就诊的患者，一律视为爽约，需重新排队挂号或重新预约。
+</p>
+<p style=" ">
+	3、预约患者无法按照预约时间就诊时，请提前1—2天通过预约方式取消预约。累计三次爽约者将自动纳入黑名单，中止预约服务。
+</p>
+<p style=" ">
+	4、节假日期间不提供可预约号源。
+</p>
+<p style=" ">
+	<br>
+</p>
+<p style=" ">
+	<br>
+</p></span>
+                                        </div>
+                                        </a><div class="nav-more"><a class="hospital_jzxz" href="/News/NewsListInfo?HospitalId=6101000002&amp;callIndex=jzxz">
+                                            </a><a class="public-hover hospital_jzxz" href="/News/NewsListInfo?HospitalId=6101000002&amp;callIndex=jzxz">更多&gt;&gt;</a>
+                                        </div>
+                                    </div>
+                                </li>                                
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="/Appointment/SchedulingInfo">医生排班</a> </li>
+                    <!--<li id="nav-bar-search">
+                        <a>查询服务</a>
+                        <div class="drop-down">
+                            <ul>
+                                <li>
+                                    <span class="public-hover-nav"><a class="~/RechargeBusiness/CheckReportQuery">报告查询</a></span>
+                                    <div class="nav-box nav-bar-list-hos">
+                                        <div class="typePart50p bor1">
+                                            <h3>检查结果查询</h3>
+                                            <p>可通过我院开通的线上渠道查询个人检查报告结果</p>
+                                            <a class="~/RechargeBusiness/CheckReportQuery"><img class="goto-icon" src="~/Content/images/round.png" /></a>
+                                        </div>
+                                        <div class="typePart50p">
+                                            <h3>检验结果查询</h3>
+                                            <p>可通过我院开通的线上渠道查询个人检验报告结果</p>
+                                            <a class="~/RechargeBusiness/InspectionReportQuery"><img class="goto-icon" src="~/Content/images/round.png" /></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="public-hover-nav"><a class="~/RechargeBusiness/ElectronicMedicalRecord">电子病历</a></span>
+                                    <div class="nav-box nav-bar-list-hos">
+                                        <div class="typePart61p">
+                                            <h3>电子病历</h3>
+                                            <p>可通过我院开通的线上渠道查询历史的门诊就诊记录</p>
+                                            <a class="~/RechargeBusiness/ElectronicMedicalRecord"><img class="goto-icon" src="~/Content/images/round.png" /></a>
+                                        </div>
+                                        <div class="typePart39p">
+                                            <img src="~/Content/images/menzhen.png" class="stop-info" />
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="public-hover-nav"><a class="~/RechargeBusiness/PriceEnquiry" id="sizeSearch">价目查询</a></span>
+                                    <div class="nav-box nav-bar-list-hos">
+                                        <div class="typePart50p bor1">
+                                            <h3>价目查询</h3>
+                                            <p>可通过我院开通的线上渠道查询检查、检验、治疗等收费项目</p>
+                                            <a id="pagesize" class="~/RechargeBusiness/PriceEnquiry"><img class="goto-icon" src="~/Content/images/round.png" /></a>
+                                        </div>
+                                        <div class="typePart50p">
+                                            <h3>药价查询</h3>
+                                            <p>可通过我院开通的线上渠道查询药品的价格信息</p>
+                                            <a id="blocksize" class="~/RechargeBusiness/DrugPriceEnquiry"><img class="goto-icon" src="~/Content/images/round.png" /></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li id="nav-bar-pay">
+                        <a>充值缴费</a>
+                        <div class="drop-down">
+                            <ul>
+                                <li>
+                                    <span class="public-hover-nav"><a class="~/RechargeBusiness/CardRechargeIndex">就诊卡充值</a></span>
+                                    <div class="nav-box nav-bar-list-hos">
+                                        <div class="typePart33p bor1">
+                                            <h3>就诊卡充值</h3>
+                                            <p>通过平台可使用银行卡、微信、支付宝等方式对就诊卡进行充值</p>
+                                            <a class="~/RechargeBusiness/CardRechargeIndex"><img class="goto-icon" src="~/Content/images/round.png" /></a>
+                                        </div>
+                                        <div class="typePart33p bor1">
+                                            <h3>就诊卡余额查询</h3>
+                                            <p>通过平台可查询就诊卡当前的账户余额</p>
+                                            <a class="~/RechargeBusiness/RechargeQuery"><img class="goto-icon" src="~/Content/images/round.png" /></a>
+                                        </div>
+                                        <div class="typePart33p">
+                                            <h3>充值记录查询</h3>
+                                            <p>仅可查询通过本平台各个渠道充值的记录</p>
+                                            <a class="~/RechargeBusiness/CardRechargeRecords"><img class="goto-icon" src="~/Content/images/round.png" /></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="public-hover-nav"><a class="~/RechargeBusiness/InHospitalPay">住院预交金</a></span>
+                                    <div class="nav-box nav-bar-list-hos">
+                                        <div class="typePart50p bor1" style="width:150px;">
+                                            <h3>住院预交金充值</h3>
+                                            <p>通过平台可使用银行卡、微信、支付宝等方式对对住院预交金进行在线充值</p>
+                                            <a class="~/RechargeBusiness/InHospitalPay"><img class="goto-icon" src="~/Content/images/round.png" /></a>
+                                        </div>
+                                        <div class="typePart50p bor1" style="width:150px;">
+                                            <h3>住院预交金余额查询</h3>
+                                            <p>通过平台可查询当前住院账户的余额</p>
+                                            <a class="~/RechargeBusiness/RechargeBussness"><img class="goto-icon" src="~/Content/images/round.png" /></a>
+                                        </div>
+                                        <div class="typePart50p" style="width:150px;">
+                                            <h3>充值记录查询</h3>
+                                            <p>仅可查询通过本平台各个渠道充值的记录</p>
+                                            <a class="~/RechargeBusiness/InHospitalPayRecord"><img class="goto-icon" src="~/Content/images/round.png" /></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="public-hover-nav"><a class="~/RechargeBusiness/ExaminConsumeRecord">消费查询</a></span>
+                                    <div class="nav-box nav-bar-list-hos">
+                                        <div class="typePart33p bor1">
+                                            <h3>诊间支付记录查询</h3>
+                                            <p>仅可查询通过本平台各个渠道诊间支付的消费记录</p>
+                                            <a class="~/RechargeBusiness/ExaminConsumeRecord"><img class="goto-icon" src="~/Content/images/round.png" /></a>
+                                        </div>
+                                        <div class="typePart33p bor1">
+                                            <h3>门诊消费记录查询</h3>
+                                            <p>可查询患者院内历史的门诊消费记录</p>
+                                            <a class="~/RechargeBusiness/ClinicConsumeRecord"><img class="goto-icon" src="~/Content/images/round.png" /></a>
+                                        </div>
+                                        <div class="typePart33p">
+                                            <h3>住院清单查询</h3>
+                                            <p>可查询住院期间的消费记录</p>
+                                            <a class="~/RechargeBusiness/InHospitalListQuery"><img class="goto-icon" src="~/Content/images/round.png" /></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="~/Questionnaire/GetSurveyPapersList">问卷调查</a></li>-->
+                    <li><a href="/News/CloseNotice">停诊公告</a></li>
+                    <li id="nav-bar-zixun">
+                        <a href="/News/NewsList">资讯</a>
+                        <div class="floatBack">
+                            <ul id="nav_NewsList"><li><a href="/News/NewsList?id=441">医院动态</a></li><li><a href="/News/NewsList?id=442">停诊公告</a></li><li><a href="/News/NewsList?id=443">就诊指南</a></li></ul>
+                        </div>
+                    </li>
+                    <li> <a href="/Download/Index">下载中心</a></li>
+                </ul>
+            </div>
+            <div class="nav-login-group" id="loginButton" style="">
+                <div class="nav-reg" onclick="JumpRegist()">
+                    注册
+                </div>
+                <div class="nav-login" id="createLogin">
+                    登录
+                </div>
+            </div>
+            <div class="nav-login-group">
+                <div class="nav-personal" id="centerButton" style="display:none">
+                    <a href="/Personal/AppointmentList">
+                        个人中心
+                    </a>
+                    <div class="nav-personal-dropdown">
+                        <div class="personal-menu">
+                            <ul>
+                                <li><span><a href="/Personal/AppointmentList">我的预约</a></span></li>
+                                <li><span><a href="/Personal/CommonPersonal">就诊人管理</a></span><span><a href="/Personal/VisitingCardManagement">就诊卡管理</a></span><span><a href="/Account/BindingEmail" id="updateemail1" style="display:none">修改邮箱</a></span></li>
+                                <li><span><a href="/Personal/DetailsMessageBindPhone">账户资料</a></span><span><a href="/Personal/ChangePassword">修改密码</a></span><span><a href="/Account/BindingPhone" id="updatemobile" style="display:none">修改注册手机</a><a href="/Account/BindingEmail" id="updateemail" style="display:">修改邮箱</a></span></li>
+                                <li><span><a href="/Personal/MyCollection">我的收藏</a></span><!--<span><a href="~/Personal/MessageCenter">消息中心</a></span>--></li>
+                            </ul>
+                        </div>
+                        <img class="personal-img" src="/Content/images/personal.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--content-->
+    <section id="bottomStyle" style="min-height: 339px;">
+        
+
+<script src="/Scripts/sliderbar-index.js"></script>
+<style>
+    /*临时style 要迁入base.css*/
+    .public-btn, .login-btn {
+        margin-bottom: 22px;
+    }
+
+    .index-panel .panel-body .panel-info {
+        display: block;
+        float: left;
+        margin-left: 12px;
+        border-left: 1px solid #dddddd;
+        padding-left: 28px;
+        width: 416px;
+        height: 188px;
+        margin-top: 0;
+        height: 217px; /*lizimo 2017/08/16*/
+    }
+
+        .index-panel .panel-body .panel-info .title, .index-panel .panel-body .panel-info .text {
+            font-size: 16px;
+        }
+
+        .index-panel .panel-body .panel-info .title, .index-panel .panel-body p {
+            margin: 2px 0;
+        }
+
+        .index-panel .panel-body .panel-info .panel-guide {
+            bottom: -29px;
+        }
+
+    .index-content .notice {
+        display: inline-block;
+        font-size: 14px;
+        margin-right: 120px;
+    }
+
+        .index-content .notice .notice_cont {
+            display: inline-block;
+            margin-right: 15px;
+            margin-left: 5px;
+        }
+
+        .index-content .notice .notice_time {
+            color: #b1b1b1;
+        }
+
+    .index-content .marquee_notice {
+        padding-top: 13px;
+    }
+
+    .index-content .row-margin {
+        margin-top: 13px;
+    }
+
+    .index-content .hos-place {
+        font-size: 22px;
+        color: #333333;
+        font-weight: bold;
+        padding-bottom: 5px;
+        min-height: 33px;
+        min-width: 5px;
+    }
+
+    .index-frendly {
+        margin-bottom: 20px;
+    }
+
+        .index-frendly .index-frendly-list {
+            width: 210px;
+        }
+
+            .index-frendly .index-frendly-list li {
+                margin-bottom: 8px;
+            }
+
+            .index-frendly .index-frendly-list a {
+                font-size: 14px;
+                color: #b1b1b1;
+            }
+
+    .index-font {
+        margin-top: -20px;
+    }
+
+    .clinic-enter:hover {
+        background-color: #9c0404;
+    }
+</style>
+<!--content-->
+<div class="index-content">
+    <div class="public-contanier">
+        <div class="index-slider wapper-left">
+            <div id="banner_tabs" class="flexslider">
+
+            						<ul class="slides">							<li style="position: absolute; left: 0px; top: 0px; display: none;">								<a title="网站首页轮播图">									<img src="/static/img/1.jpg">								</a>							</li>							<li style="position: absolute; left: 0px; top: 0px; display: list-item;">								<a title="网站首页轮播图">									<img src="http://1.85.45.235:22125//upload/201811/27/201811271641266582.png">								</a>							</li>						</ul>						<ul class="flex-direction-nav">							<li>								<a class="flex-prev" href="javascript:;">Previous</a>							</li>							<li>								<a class="flex-next" href="javascript:;">Next</a>							</li>						</ul>						<ol id="bannerCtrl" class="flex-control-nav flex-control-paging">							<li class="">								<a>0</a>							</li>							<li class="active">								<a>1</a>							</li>						</ol></div>
+
+        </div>
+        <div class="index-clinic wapper-right">
+            <div class="clinic-title">
+                <span>快速预约</span>
+            </div>
+            <div class="clinic-btn-group">
+                <div class="clinic-select">
+                    <div class="select-hos">
+
+                        <a class="selet-hos-open"><b></b></a>
+                        <div class="bigoption" id="hospitalAreaSelect" style="display: none;"><a id="015d25ea-a9a1-bad2-4a20-c1c388d66557">立人科技园智慧好医院</a></div>
+                    </div>
+                    <br clear="all">
+                    <input type="hidden" id="select-hos-value" value="015d25ea-a9a1-bad2-4a20-c1c388d66557">
+                </div>
+                <div class="clinic-select">
+                    <div class="select-depart">
+                        <span class="select-depart-txt">请选择科室</span>
+                        <a class="selet-depart-open"><b></b></a>
+                       
+                    <br clear="all">
+                    <input type="hidden" id="select-depart-value" value="">
+                </div>
+                <div class="clinic-select">
+                    <div class="select-doctor">
+                        <span class="select-doctor-txt">请选择医生</span>
+                        <a class="selet-doctor-open"><b></b></a>
+                        <div class="bigoption" id="docSelect" style="max-height: 200px; overflow-y: scroll; display: none;">
+                        </div>
+                    </div>
+                    <br clear="all">
+                    <input type="hidden" id="select-doctor-value">
+                </div>
+                <div class="clinic-enter" onclick="QuickAppointment()">
+                    确认预约
+                </div>
+                <div class="clinic-remarks">
+                    <a target="_blank" id="Blank" href="/News/NewsListInfo?HospitalId=6101000002&amp;callIndex=jzxz">就诊须知</a>
+                </div>
+                <script>
+                    $("#Blank").attr("href", "/News/NewsListInfo?HospitalId=" + $("#HospitalId").val() + "&callIndex=jzxz");
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="public-contanier">
+        <div style="width:100%;overflow:hidden">
+           
+        </div>
+    </div>
+    <div class="public-contanier row-margin">
+        <img id="hosloading" style="position: absolute; z-index: 999; width: 840px; height: 318px; display: none;" src="/Content/images/timg.gif">
+        <div class="index-panel wapper-left" id="hosMessage" style="">
+            <div class="panel-header">
+                <ul id="hospitalAreaTab"><li class="active">立人科技园智慧好医院</li></ul>
+                <input type="hidden" id="active-org-value" value="015d25ea-a9a1-bad2-4a20-c1c388d66557">
+                <input type="hidden" id="active-org-name">
+            </div>
+            <div class="panel-body" id="hospitalAreaText">
+
+            <div class="baseinfo"><img class="pull-left" src="http://1.85.45.235:22123//upload/2018-11/hospital/20181128180530_595524868.jpg">								<div class="panel-info">									<p>										<span class="title">医院等级：</span><span class="text">三级甲等</span>									</p>									<p>										<span class="title">预约电话：</span><span class="text">029-85323610</span>									</p>									<p>										<span class="title">医院地址：</span><span class="text">西安市雁塔区雁塔西路277号</span>									</p>									<p class="line-part">										<span class="title">乘车线路：</span><span id="6101000002" class="text linenode">本市患者可乘坐：
+西郊：101路、106路、503路、504路、24路、14路
+南郊：5路、14路、教育专线、24路、204路、713路
+东郊： 709路、 716路、710路、401路、401专线、教育专线、
+北郊： 618路、46路、18路
+外地患者可乘坐：
+在火车站可乘坐5路、30路直达我院.
+</span>									</p>									<div class="btn panel-guide">										<a id="baiduMap" href="http://map.baidu.com/?newmap=1&amp;s=con%26wd%3D 立人科技园智慧好医院%26c%3D233&amp;from=alamap&amp;tpl=mapdots" target="_blank">来院导航</a>									</div>								</div>							</div></div>
+        </div>
+        <div class="index-news wapper-right">
+            <img id="newsloading" style="position: absolute; z-index: 999; width: 320px; height: 318px; display: none;" src="/Content/images/timg1.gif">
+            <div id="newList" style="">
+                <div class="news-header">
+                    <span class="news-list">新闻资讯</span>
+                    <span class="news-more"><a href="/News/NewsList?JianPing=6101000002_news">更多&gt;&gt;</a></span>
+                </div>
+                <div class="news-body">
+                    <ul><li class="recommend"><a href="../News/NewsListInfo?id=13613"><span class="text">门诊医师停诊信息</span><span class="date">08-20</span></a></li><li class="recommend"><a href="../News/NewsListInfo?id=13508"><span class="text">门诊医师停诊信息</span><span class="date">08-15</span></a></li><li class="recommend"><a href="../News/NewsListInfo?id=13478"><span class="text">门诊医师停诊信息</span><span class="date">08-14</span></a></li><li class="recommend"><a href="../News/NewsListInfo?id=13412"><span class="text">门诊医师停诊信息</span><span class="date">08-12</span></a></li><li class="recommend"><a href="../News/NewsListInfo?id=13358"><span class="text">门诊医师停诊信息</span><span class="date">08-09</span></a></li><li class="recommend"><a href="../News/NewsListInfo?id=13308"><span class="text">门诊医师停诊信息</span><span class="date">08-07</span></a></li></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="index-footer">
+    <div class="public-contanier">
+        <div class="index-frendly wapper-left">
+            <div class="index-frendly wapper-left">
+                <div class="index-frendly-list pull-left">
+                    <a style="font-size: 0" href="http://www.dyyy.xjtu.edu.cn/" target="_blank"></a>
+                </div>
+                <div class="index-frendly-list pull-left">
+                    <a style="font-size: 0" href="http://www.sxwjw.gov.cn/" target="_blank"></a>
+                </div>
+            </div>
+            <div class="index-frendly wapper-left index-font">
+
+            </div>
+        </div>
+        <div class="index-appinfo wapper-right">
+
+        </div>
+    </div>
+</div>
+    </section>
+
+    <div class="index-copyright">
+        <div class="public-contanier">
+            <span class="text">技术支持：<span><a href="http://www.hbjk114.com" target="_blank">惠宾健康&amp;立人科技园智慧好医院信息部</a></span></span>
+        </div>
+
+    </div>
+    <!--go-btn-->
+    
+
+<script src="/ScriptActions/Home/Index.js"></script>
+
+
+<script>
+    $(function () {
+        if (medicalRecord == 1) {
+            $(".J-li-zbyy").show();
+            $(".J-li-jzxz").hide();
+        } else {
+            $(".J-li-jzxz").show();
+            $(".J-li-zbyy").hide();
+        }
+        if (RegistWay == "1") {
+            $("#updateemail").attr("style", "display:");
+        } else if (RegistWay == "2") {
+            $("#updatemobile").attr("style", "display:");
+        } else if (RegistWay == "1,2") {
+            $("#updateemail1").attr("style", "display:");
+            $("#updatemobile").attr("style", "display:");
+        }
+        $.each($(".nav-bar ul li a"), function () {
+            if (window.location.pathname == "/") {
+                $(".nav-bar ul li").eq(0).addClass("actives");
+            }
+            if ($(this).attr("href") == window.location.pathname) {
+                $(this).parent().addClass("actives");
+            }
+        });
+        $("#nav-bar-search ul li,#nav-bar-pay ul li").find("a").each(function () {
+            $(this).click(function () {
+                if (window.sessionStorage.getItem("PassportId") != "" && window.sessionStorage.getItem("PassportId") != null && window.sessionStorage.getItem("PassportId") != "undefined") {
+                    window.location = $(this).attr("class");
+                    console.log($(this).attr("class"));
+                } else if ($(this).attr("id") == "pagesize" || $(this).attr("id") == "blocksize" || $(this).attr("id") == "sizeSearch") {
+                    window.location = $(this).attr("class");
+                    console.log($(this).attr("class"));
+                } else {
+                    createLogin();
+                    console.log($(this).attr("class"));
+                }
+            });
+        });
+        $(".goto-icon").mouseover(function () {
+            $(this).attr("src", "/Content/images/round1.png");
+        }).mouseleave(function () {
+            $(this).attr("src", "/Content/images/round.png");
+        });
+    });   
+</script>
+<div id="IDC_AJAXMASK" style="display: none;"></div><div id="IDC_LOADING" style="display: none;">
+
+    </div>
+    <div id="login" class="mask-shadow is-visible"><div class="bgshadow">
+
+    </div>	<div class="mydialog mydialogs animated bounceInDown" style="margin-top: -178.5px;">
+        <div class="login">
+            <h4>登录</h4>
+            <form class="" name="form1" id="form1" method="post" action="patientlogin">
+                <div class="warnings" style="display: none;">
+
+                    <p class="warning-cont"></p>
+                </div>
+                <div class="controls">
+
+                    <input class="largeInput" name="userName" id="LoginName" maxlength="50" placeholder="用户名" type="text" value="">
+                </div>
+
+                <div class="controls">
+
+                    <input class="largeInput" maxlength="16" name="userPwd" id="Password" placeholder="密码" type="password">
+                </div>
+                <div class="controls">
+                    <div class="specil-controls">
+                        <span class="float-left">
+                            <a class="login-hover" href="/Account/FindPassword">忘记密码？</a>
+                        </span>
+
+                    </div>
+                    <div class="controls">
+                        <input class="login-hover" type="submit" value="注册">
+                        <button class="login-btn btnAnimate" value="登录"  type="submit">登录</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

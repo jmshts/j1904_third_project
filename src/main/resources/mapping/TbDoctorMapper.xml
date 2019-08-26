@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.mapper.TbDoctorMapper">
+    <resultMap id="DoctorMap" type="com.sy.pojo.TbDoctor">
+        <id property="did" column="did"/>
+        <result property="doctorname" column="doctorName"/>
+        <result property="doctorpwd" column="doctorPwd"/>
+        <result property="doctorrealname" column="doctorRealName"/>
+        <result property="idnum" column="idNum"/>
+        <result property="phonenum" column="phoneNum"/>
+        <result property="department" column="departMent"/>
+        <result property="info" column="info"/>
+    </resultMap>
+<!--    sql代码块-->
+    <sql id="doctor_cloums">
+        did,
+        doctorName,
+        doctorPwd,
+        doctorRealName,
+        idNum,
+        phoneNum,
+        departMent,
+        info
+    </sql>
+<!--    加载所有的医生-->
+    <select id="loadAll" resultMap="DoctorMap">
+        select
+        <include refid="doctor_cloums"/>
+        from
+        tb_doctor
+    </select>
+<!--    获取页面-->
+    <select id="loadpage" resultType="TbDoctor">
+        select
+        <include refid="doctor_cloums"/>
+        from
+        tb_doctor
+    </select>
+<!--    获取所有的医生数量-->
+    <select id="gettotalcount" resultType="int">
+   select
+   count(did)
+   from
+   tb_doctor
+</select>
+<!--    模糊查询-->
+    <select id="like" resultType="TbDoctor">
+        select
+        <include refid="doctor_cloums"/>
+        from
+        tb_doctor
+        where
+        department
+        like '%' #{like} '%'
+    </select>
+<!--    通过did获取doctor-->
+    <select id="findDoctorByDid" parameterType="int" resultType="com.sy.pojo.TbDoctor">
+        select
+        *
+        from
+        tb_doctor
+        where
+        did=#{did}
+    </select>
+</mapper>

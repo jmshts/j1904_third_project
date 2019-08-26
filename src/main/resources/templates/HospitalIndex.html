@@ -1,0 +1,468 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/Content/css/normalize.css" />
+    <link rel="stylesheet" href="/Content/css/base.css" />
+    <link rel="stylesheet" href="/Content/css/basecolor.css" />
+    <link rel="stylesheet" href="/Content/css/animate.css" />
+    <script src="/Scripts/jquery-1.8.2.js"></script>
+    <script src="/Scripts/jQuery.md5.js"></script>
+    <script src="/Scripts/nav-bar.js"></script>
+    <script src="/Scripts/dialog.js"></script>
+    <script src="/Scripts/page.js"></script>
+    <script src="/Scripts/HB.Framework.js"></script>
+
+    <script src="/Scripts/WdatePicker.js"></script>
+    <script src="/Scripts/public.js"></script>
+    <script src="/Scripts/HB.Regular.js"></script>
+    <script src="/Scripts/publicModel.js"></script>
+    <script src="/Scripts/OrgConfig.js"></script>
+    <title>医院主页</title>
+
+    <script type="text/javascript">
+        var medicalRecord = "0";  //是否启用专病预约标识
+        var weisiteurl = "";
+        var RegistWay = "1";
+        var booktype = "1";
+        var branchtype = "1";
+        var doctorId = "";
+        var departmentIdMaster = "-1";
+
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = [
+                "Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"
+            ];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        if (!IsPC()) {
+            if (weisiteurl != "") {
+                location.href = weisiteurl; //取消注释并填写微站代码
+            }
+
+        }
+
+        function JumpRegist() {
+            if (RegistWay == "1") {
+                window.location.href = '/Account/Register';
+            } else if (RegistWay == "2") {
+                window.location.href = '/Account/PhoneRegister';
+            } else if (RegistWay == "1,2") {
+                window.location.href = '/Account/PhoneRegister';
+            }
+
+        }
+    </script>
+    <style>
+        .index-nav .nav-bar .zbhos-depart > ul > li {
+            width: 220px!important;
+        }
+        #zbdepList_doc .depart-depart>span {
+            width: 120px !important;
+        }
+        #zbdepList_doc .depart-depart>ul>li {
+            width: auto!important;
+        }
+    </style>
+</head>
+<body>
+<input type="hidden" id="idc_orgid" value="015d25ea-a9a1-bad2-4a20-c1c388d66557" />
+<input type="hidden" id="idc_channelId" value="00faac31-a9a0-a027-4797-746ebbc98720" />
+<input type="hidden" id="HbManageroot" value="http://1.85.45.235:22123/" />
+<input type="hidden" id="idc_cmsImgUrl" value="http://1.85.45.235:22125/">
+<input type="hidden" id="HospitalId" value="6101000002" />
+<!--header-->
+<div class="index-header">
+    <div class="public-contanier">
+        <div class="header-info">
+            <a href="/Home/Index">
+
+            </a>
+        </div>
+        <div class="header-function">
+            <div class="header-iflogin">
+                <label id="personalWelcome" style="display:none;float:left;">
+                    <span>欢迎<a href="/Personal/AppointmentList"><small id="loginNameShow"></small></a></span>
+                    <span><a href="#" onclick="LoginOut()">退出</a></span>
+                </label>
+            </div>
+            <div class="header-search">
+                <div class="search-control">
+                    <div class="search-type">
+                        <div class="select_box">
+                            <span class="select_txt">科室</span>
+                            <input id="select_value" type="hidden" value="search_dep" />
+                            <a class="selet_open"><b></b></a>
+                            <div class="option">
+                                <a id="search_dep">科室</a>
+                                <a id="search_doc">医生</a>
+                            </div>
+                        </div>
+                        <br clear="all">
+                    </div>
+                    <div class="search-value">
+                        <input id="searchText" type="text" value="" placeholder="请输入文字" />
+                    </div>
+                    <div class="btn btn-default search-btn mod_select" onclick="topSearch()">
+                        搜索
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<!--nav-->
+<div class="index-nav">
+    <div class="public-contanier">
+        <div class="nav-bar">
+            <ul class="nav-bar-list">
+                <li><a href="/Home/Index">首页</a></li>
+            </ul>
+        </div>
+        <div class="nav-login-group" id="loginButton" style="display:none">
+            <div class="nav-reg" onclick="JumpRegist()">
+                注册
+            </div>
+            <div class="nav-login" id="createLogin">
+                登录
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--content-->
+<section id="bottomStyle">
+
+
+    <script src="/Scripts/sliderbar-index.js"></script>
+    <script src="/Scripts/page.js"></script>
+    <style>
+        .tablist li:hover {
+            color: #FFA800;
+        }
+
+        .clinictypelist li:hover {
+            color: #FFA800;
+        }
+        .J-lookatbox {
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 999;
+        }
+        .J-lookatboxBg {
+            position: fixed;
+            left: 0;
+            top: -500px;
+            right: 0;
+            bottom: -500px;
+            background-color: #5A6E8C;
+            opacity: 0.4;
+            filter: alpha(opacity=40);
+            z-index: 1;
+        }
+        .ui-lookatbox {
+            position: absolute;
+            z-index: 10;
+            width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px;
+            margin-top: 15%;
+            left: 0;
+            right: 0;
+            background: #FFF;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        .ui-lookatbox div {
+            width: 100%;
+        }
+        .ui-lookatbox-content {
+            margin: 20px 0 30px 0;
+        }
+        .ui-lookatbox-footer {
+            text-align: right;
+            color: #0674E4;
+        }
+        .ui-lookatbox-footer:hover {
+            cursor: default;
+        }
+        .ui-ClassificationDepartment {
+            border-bottom: 1px solid #DDDDDD;
+        }
+        .tab-contain .tab .ui-ClassificationDepartment ul {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 15px 0;
+        }
+        .tab-contain .tab .ui-ClassificationDepartment ul .active {
+            color: #0674E4;
+        }
+
+        .tab-contain .tab .ui-ClassificationDepartment ul li {
+            position: relative;
+            float: left;
+            line-height: 20px;
+            text-align: left;
+            margin-left: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 5px 0;
+        }
+    </style>
+    <!--content-->
+    <input type="hidden" id="J-medicalRecord" value="0" />
+    <div class="content row-largr-marBot">
+        <div class="public-contanier" style="margin-top: 20px;">
+            <!--info-introduce-->
+            <img id="hosMessage" style="position:absolute;z-index:9999;width:1200px;height:309px;" />
+
+            <img id="selectClinic" style="position:absolute;z-index:9999;width:1200px;height:220px;" />
+            <!--info-main-->
+            <div class="public-contanier margin-large-top">
+                <!--tab-switch-->
+                <div class="tab-switch">
+                    <ul>
+                        <li class="active">
+                            预约挂号
+                        </li>
+                        <li>
+                            就诊须知
+                        </li>
+                        <li>
+                            <a href="/Appointment/DocSchedule" target="_blank">医生导航</a>
+                        </li>
+                        <li>
+                            <a href="/Appointment/DepartSchedule" target="_blank">科室导航</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-contain">
+                    <div class="tab show">
+                        <!--tab-name-->
+                        <div class="tab-name">
+
+                            <span class="detailName">筛选</span>
+
+                            <div class="clear"></div>
+                        </div>
+                        <!---科室分类（热门科室、内科系统……）-->
+                        <div class="ui-ClassificationDepartment" style="display:none">
+                            <div class="tab-choose-left">
+                                <span>科室分类</span>
+                            </div>
+                            <div class="tab-choose-right">
+                                <ul class="J-ClassificationDepartment"></ul>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <!--tab-choose-dept-->
+                        <div class="tab-choose-dept">
+                            <div class="tab-choose-left">
+                                <span>科室名称</span>
+                            </div>
+                            <div class="tab-choose-right">
+                                <ul class="tablist"></ul>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <!--tab-choose-deptType-->
+                        <div class="tab-choose-deptType">
+                            <div class="tab-choose-left">
+                                <span>职称类型</span>
+                            </div>
+                            <div class="tab-choose-right">
+                                <ul class="clinictypelist"></ul>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <!---号源信息-->
+                        <div class="tab-choose-dept J-sourceInfo" style="display: none;">
+                            <div class="tab-choose-left">
+                                <span>号源信息</span>
+                            </div>
+                            <div class="tab-choose-right">
+                                <ul class="">
+                                    <li class="active" data-id="0">按号别预约</li>
+                                    <li class="" data-id="1">按专病预约</li>
+                                </ul>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <img id="clinicList" style="position:absolute;z-index:9999;width:1200px;height:370px;"  />
+                        <div class="tab-name margin-large-top">
+
+                            <span class="detailName">科室出诊医生</span>
+                            <p class="J-lookat-p" style="display: inline-block; float: right; display: none;"><span>提供号别、专病预约两种方式。</span><a class="J-lookat" style="color: blue;text-decoration: underline;">查看说明</a></p>
+                            <div class="clear"></div>
+                        </div>
+                        <!--tab-doc-->
+                        <div class="tab-doc">
+                            <!--tab-choose-doc-->
+                            <div class="tab-choose-doc" style="min-height:300px">
+                                <ul id="doclist" data-titleid="" data-depid=""></ul>
+                                <div class="clear"></div>
+                            </div>
+
+
+                            <div class="xm12 padding-big text-center">
+                                <ul class="page" maxshowpageitem="5" pagelistcount="5" id="page"></ul>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="tab">
+                        <div class="public-tab" id="Introdution">
+                            <p>
+
+                            </p>
+                        </div>
+
+                    </div>
+                    <div class="tab">
+                        <div class="public-tab">
+                            <p>
+                                <span style="font-size:16px;">1.预约成功后请于就诊当天提前30分钟来院兑换挂号票，过时预约作废，按现场排队或另行预约。</span>
+                            </p>
+                            <p>
+                                <span style="font-size:16px;">2.预约成功后请于就诊当天提前30分钟来院兑换挂号票，过时预约作废，按现场排队或另行预约。</span>
+                            </p>
+                            <p>
+                                <span style="font-size:16px;">3.预约成功后请于就诊当天提前30分钟来院兑换挂号票，过时预约作废，按现场排队或另行预约。</span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cliniclist"></div>
+    <div class="pop-mask" style="display: none !important;">
+
+    </div>
+    <input type="hidden" id="CurDept" value="">
+    <input type="hidden" id="SearchKeyWord" value="5">
+
+
+    <script>
+        $(function () {
+            //tab切换
+            /*$(".tab-switch li").click(function () {
+                var num = $(".tab-switch li").index(this);
+                $(this).addClass("active").siblings().removeClass("active");
+                $(".tab-contain").find(".tab").eq(num).addClass("show").siblings().removeClass("show");
+            });
+            $("#detail").click(function () {
+                $(".tab-switch").find("li").eq(2).addClass("active").siblings().removeClass("active");
+                $(".tab-contain").find(".tab").eq(2).addClass("show").siblings().removeClass("show");
+            })
+            //tab   hover效果
+            $(".tab-switch ul .active").siblings().hover(function () {
+                $(this).addClass("hover");
+            },
+                function () {
+                    $(this).removeClass("hover");
+                });*/
+            //默认时间
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var addDay = "7";
+            var nowDate7 = dateCount(date, addDay);
+            var nowDate = year + "-" + month + "-" + day;
+            $("#startDate").val(nowDate);
+            $("#endDate").val(nowDate7);
+
+            //分页
+            //function tt(dd) {
+            //    PageIndex = dd;
+            //}
+            //$("#page").initPage(50, 1, tt);
+        });
+    </script>
+
+
+</section>
+
+<div class="index-copyright">
+    <div class="public-contanier">
+
+    </div>
+
+</div>
+<!--go-btn-->
+
+</body>
+<script src="/ScriptActions/Appointment/HospitalIndex.js"></script>
+
+</html>
+<script>
+    $(function () {
+        if (medicalRecord == 1) {
+            $(".J-li-zbyy").show();
+            $(".J-li-jzxz").hide();
+        } else {
+            $(".J-li-jzxz").show();
+            $(".J-li-zbyy").hide();
+        }
+        if (RegistWay == "1") {
+            $("#updateemail").attr("style", "display:");
+        } else if (RegistWay == "2") {
+            $("#updatemobile").attr("style", "display:");
+        } else if (RegistWay == "1,2") {
+            $("#updateemail1").attr("style", "display:");
+            $("#updatemobile").attr("style", "display:");
+        }
+        $.each($(".nav-bar ul li a"), function () {
+            if (window.location.pathname == "/") {
+                $(".nav-bar ul li").eq(0).addClass("actives");
+            }
+            if ($(this).attr("href") == window.location.pathname) {
+                $(this).parent().addClass("actives");
+            }
+        });
+        $("#nav-bar-search ul li,#nav-bar-pay ul li").find("a").each(function () {
+            $(this).click(function () {
+                if (window.sessionStorage.getItem("PassportId") != "" && window.sessionStorage.getItem("PassportId") != null && window.sessionStorage.getItem("PassportId") != "undefined") {
+                    window.location = $(this).attr("class");
+                    console.log($(this).attr("class"));
+                } else if ($(this).attr("id") == "pagesize" || $(this).attr("id") == "blocksize" || $(this).attr("id") == "sizeSearch") {
+                    window.location = $(this).attr("class");
+                    console.log($(this).attr("class"));
+                } else {
+                    createLogin();
+                    console.log($(this).attr("class"));
+                }
+            });
+        });
+        $(".goto-icon").mouseover(function () {
+            $(this).attr("src", "/Content/images/round1.png");
+        }).mouseleave(function () {
+            $(this).attr("src", "/Content/images/round.png");
+        });
+    });
+</script>

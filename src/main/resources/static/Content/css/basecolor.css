@@ -1,0 +1,930 @@
+html,
+body {
+    color: #333;
+}
+
+.index-nav .public-contanier {
+    background-color: #800000;
+}
+
+
+/*basecolor:background-color*/
+
+.index-nav,
+.index-nav .nav-bar ul.nav-bar-list>li>.drop-down>ul,
+.index-header .header-function .header-search .search-control .search-btn,
+.index-clinic .clinic-enter {
+    background-color: #800000
+}
+
+
+/*nav-bar-drop-down:background-color*/
+
+.index-nav .nav-bar ul.nav-bar-list>li>.drop-down>ul>li>.nav-box,
+.index-nav .nav-bar ul.nav-bar-list>li>.drop-down>ul>li.active>span,
+.floatBack {
+    background:#720000;
+}
+
+.index-clinic .clinic-title {
+    color: #800000;
+}
+
+.typePart33p p,
+.typePart39p p,
+.typePart61p p,
+.typePart50p p {
+    color: #81bae1;
+}
+
+.index-clinic .clinic-remarks {
+    color: #ff5400;
+}
+
+.index-panel .panel-header ul li {
+    color: #282828;
+    border: 1px solid #d2d2d2;background-color:#edf2fe; /*2017/08/16lizimo*/
+}
+
+.index-panel .panel-header ul li.active {
+    color: #282828;
+    border: 1px solid #d2d2d2;
+    border-bottom: 2px solid #fff;
+    background-color:white;
+}
+
+.index-panel .panel-body .panel-info .title {
+    color: #363535;
+}
+
+.index-panel .panel-body .panel-info .panel-guide {
+    color: #ff4800;
+    border: 1px solid #ff4800;
+}
+
+.index-news .news-header {
+    color: #282828;
+    border-bottom: 1px solid #d2d2d2;
+}
+
+.index-news .news-header .news-more {
+    color: #8e8e8e;
+}
+
+.index-news .news-body ul li {
+    color: #282828;
+}
+
+.index-news .news-body ul li .text {
+    color: #282828;
+}
+
+.index-news .news-body ul li .date {
+    color: #9d9d9d;
+}
+
+.index-news .news-body ul li .hot {
+    color: #fff;
+}
+
+.index-copyright {
+    background: #808080;
+}
+
+.index-news .news-body ul li.recommend {
+    color: #df0606;
+}
+
+.index-frendly .frendly-thumb {
+    border: 1px solid #bfbfbf;
+}
+
+.index-frendly .frendly-thumb span {
+    color: #666666;
+}
+
+.index-frendly .frendly-text {
+    color: #666666;
+}
+
+.select_box {
+    color: #2f2f2f;
+}
+
+.option {
+    border: solid 1px #bfbfbf;
+}
+
+.option a:hover {
+    background: #9c0404;
+    color: #fff;
+}
+
+.select-hos .bigoption,
+.select-depart .bigoption,
+.select-doctor .bigoption {
+    border: solid 1px #bfbfbf;
+}
+
+.select-hos .bigoption a:hover,
+.select-depart .bigoption a:hover,
+.select-doctor .bigoption a:hover {
+    background: #9c0404;
+    color: #fff;
+}
+
+.index-header .header-info span.hosname {
+    color: #363636;
+}
+
+.index-header .header-info span.hosmeta {
+    color: #616161;
+}
+
+.index-header .header-function .header-iflogin {
+    color: #494949;
+}
+
+.index-header .header-function .header-iflogin span:after {
+    border-right: 2px solid #494949;
+}
+
+.index-header .header-function .header-iflogin small {
+    color: #ff5400 !important;
+}
+
+.index-header .header-function .header-search .search-control .search-type {
+    border: 1px solid #bfbfbf;
+    color: #2f2f2f;
+}
+
+.index-header .header-function .header-search .search-control .search-value input {
+    border: 1px solid #bfbfbf;
+}
+
+.index-nav .nav-bar ul.nav-bar-list>li.active {
+    background: #9c0404; /*******lizimo/2017/08/14**************/
+}
+
+.index-clinic .clinic-select {
+    border: 1px solid #dddddd;
+    color: #666;
+}
+
+.index-panel {
+    height: 318px;
+    border-bottom: 1px solid #d2d2d2;
+}
+
+.index-panel .panel-header {
+    border-bottom: 1px solid #d2d2d2;
+}
+
+.index-panel .panel-body .panel-info .text {
+    color: #666666;
+}
+
+.index-news .news-header .news-more {
+    color: #8e8e8e;
+}
+
+.index-nav .nav-bar ul.nav-bar-list>li>.drop-down>ul>li.active>span {
+    background: #720000;
+}
+
+.index-nav .nav-bar .hos-title .hos-box span.active {
+    background: #0271a3;
+}
+
+.index-nav .nav-bar .hos-depart>ul>li span:hover {
+    background: #9c0404;
+}
+
+.index-nav .nav-bar .depart-title .depart-box span.active {
+    background: #9c0404;
+}
+
+.index-nav .nav-bar .depart-depart>ul>li:hover {
+    background: #9c0404;
+}
+
+.index-nav .nav-login-group>div .nav-personal-dropdown {
+    background: #720000;
+}
+
+.index-nav .nav-login-group>div .nav-personal-dropdown .personal-menu ul li span:hover {
+    background: #9c0404;
+}
+
+.floatBack ul li:hover,
+.floatBack ul li.active {
+    background: #9c0404;
+}
+
+.index-nav .nav-bar .hos-title .hos-box span {
+    border: 1px solid #0763a2;
+}
+
+.index-header .header-function .header-search .search-control .search-value input:focus {
+    border: 1px solid #800000;
+    box-shadow: 0 0 3px #800000;
+    outline: 0;
+}
+
+.index-nav .nav-bar .depart-title .depart-box {
+    /*border: 1px solid #0763a2;*/
+}
+
+.index-nav .nav-bar .hos-title .hos-box {
+    /*border: 1px solid #0763a2;*/
+}
+
+.index-nav .nav-bar .depart-title .depart-box span {
+    border: 1px solid #0763a2;
+}
+
+
+/*clinic*/
+
+.index-clinic {
+    -moz-box-shadow: 0px 2px 16px #999999;
+    -webkit-box-shadow: 0px 2px 16px #999999;
+    box-shadow: 0px 2px 16px #999999;
+}
+
+.index-clinic .clinic-title {
+    border-bottom: 1px solid #d2d2d2;
+}
+
+
+/*slider-bar*/
+
+.index-slider {
+    background: #333;
+}
+
+.breadcrumbs ul li {
+    color: #4a4a4a;
+}
+
+.breadcrumbs ul li .hover {
+    color: #FFA800;
+}
+
+
+/* lizimo 2017/7/20 */
+
+/**************************btn样式**********************************/
+.btn-centermessage{
+    background-color: white;
+    border:1px solid #b1b1b1;
+    color:#4A4A4A;
+}
+.btn-centermessage-click{
+    background-color: #e9f4ff;
+    border:1px solid #0788e3;
+    color:#0788d3;
+}
+.public-hover:hover{
+    color:#ffa800;
+}
+.public-hover-nav:hover {
+    color:white;
+}
+.btn-cancel{
+    background-color: white;
+    color:#4a4a4a;
+    border:1px solid #dddddd;
+}
+.public-noClick{
+    background-color: #dddddd;
+}
+.public-noClick span{
+    color:#B1B1B1 !important;
+}
+
+/************************注册********************************/
+.Register .register-head{
+    color:#262626;
+}
+.Register .register-phone{
+    color:#1689ff;
+}
+.Register .row-header {
+    border-bottom: 1px solid #c5c5c5;
+}
+.Register .res-attation,.person-wapper-content .res-attation{
+    color:#959595;
+}
+.Register .res-input{
+    border:1px solid #dddddd;
+}
+.Register .res-code{
+    border:1px solid #dddddd;
+}
+.res-btn{
+    color:#fefefe;
+    background-color: #800000;
+}
+.Register .content-right{
+    border-left:1px solid #dddddd;
+}
+.Register .content-right p{
+    color:#4a4a4a;
+}
+.Register .res-login{
+    color:#1689ff;
+}
+.Register .res-findpwd{
+    color:#1689ff;
+}
+.Register .res-resetpwd{
+    color:#282828;
+}
+.Register .user-pro{
+    color:#1689ff;
+}
+.res-hover :hover{
+    color:#ffa800 ;
+}
+.Register :-moz-placeholder{ /* Mozilla Firefox 4 to 18 */
+    color: #b1b1b1; opacity:1;
+}
+.person-wapper-content :-moz-placeholder{ /* Mozilla Firefox 4 to 18 */
+    color: #b1b1b1; opacity:1;
+}
+.Register ::-moz-placeholder ,.person-wapper-content ::-moz-placeholder{ /* Mozilla Firefox 19+ */
+    color: #b1b1b1;opacity:1;
+}
+
+.Register input:-ms-input-placeholder,.person-wapper-content input:-ms-input-placeholder{
+    color: #b1b1b1;opacity:1;
+}
+
+.Register input::-webkit-input-placeholder,.person-wapper-content input::-webkit-input-placeholder{
+    color: #b1b1b1;opacity:1;
+}
+.Register .res-hidden{
+    background-color: #f3f2f2;
+}
+.GotoEmail .goto-succeed{
+    color:#4a4a4a;
+}
+.GotoEmail .goto-attation{
+    color:#666666;
+}
+.GotoEmail .goto-btn{
+    color:white;
+    background-color: #800000;
+}
+/********************************login**************************/
+.warning-cont{
+    color:#ff5400;
+}
+.warnings{
+    background-color: #f3f2f2;
+}
+.login-hover{
+    color:#4a4a4a;
+}
+.login-hover:hover{
+    color:#ffa800;
+}
+.mydialogs :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #b1b1b1; opacity:1;
+}
+
+.mydialogs ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #b1b1b1;opacity:1;
+}
+
+.mydialogs input:-ms-input-placeholder{
+    color: #b1b1b1;opacity:1;
+}
+
+.mydialogs input::-webkit-input-placeholder{
+    color: #b1b1b1;opacity:1;
+}
+.mydialogs .public h4, .mydialog .appoint h4, .mydialogs .login h4, .big-mydialog .register h4 {
+    color: #434343;
+    background-color: #800000;
+    color: white;
+}
+.public-btn, .login-btn, .register-btn {
+    background-color: #800000;
+    border: 0px solid #80000;
+    color: white;
+}
+/*************************************************youxiang  ********************************/
+.email-hover{
+    color:#9c0404 !important;
+}
+.email-hover:hover{
+    color:#FFA800 !important;
+}
+.Binding{
+    color:#4A4A4A;
+}
+.Binding .pagenow{
+    color:#64bd2e;
+}
+.Binding .send-btn{
+    color:white;
+    background-color: #800000;
+}
+.Binding .send-fail span{
+    background-color: #ededed;
+}
+.Binding .reset-btn{
+    background-color: #f7f7f7;
+}
+.Binding .time-back{
+    color:#b1b1b1;
+}
+/*****************************findpassword******************************/
+.Finding .form-attation{
+    color:#959595
+}
+.Finding :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #b1b1b1; opacity:1;
+}
+
+.Finding ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #b1b1b1;opacity:1;
+}
+
+.Finding input:-ms-input-placeholder{
+    color: #b1b1b1;opacity:1;
+}
+
+.Finding input::-webkit-input-placeholder{
+    color: #b1b1b1;opacity:1;
+}
+.Finding .online{
+    background-color: #0788d3;
+}
+.Finding .message-code{
+    background-color: #f7f7f7;
+}
+.Finding .message-code{
+    color:#4A4A4A;
+}
+.Finding .form-cont{
+    color:#ff5400;
+}
+
+/****************************个人中心 我的预约***************************************/
+.person-wapper-content .sideHead{
+    background-color: #daf2ff;
+}
+.person-wapper-content .sidenav .nav-head{
+    color:#282828;
+}
+.person-wapper-content .person-wapper-left, .person-wapper-content .person-wapper-right{
+    border: 1px solid #dddddd;
+}
+.person-wapper-content .sidenav .active{
+    color:#800000;
+    background-color: #e9f4ff;
+    border-left:3px solid #0788D3;
+}
+.person-wapper-content .borBot1 p{
+    color:#282828;
+}
+.person-wapper-content .borBot1 span{
+    color:#b1b1b1;
+}
+.public-appointmentStatus .active{
+    color:#0788d3;
+    border-bottom: 4px solid #0788d3;
+}
+.person-wapper-content .order-detail table thead{
+    background-color: #d2d2d2;
+}
+.public-numColor{
+    color:#ff5400 !important;
+}
+.person-wapper-content .commonperson .nodelete{
+    color:#b1b1b1;
+}
+/***********************就诊卡管理*********************************/
+.person-wapper-content .userCardList .public-card{
+    background-color: #7d7d7d;
+    border-radius: 4px;
+    color:white;
+}
+.person-wapper-content .userCardList .addcard{
+    background-color: white;
+    color:#4a4a4a;
+    border:1px solid #d1d1d1;
+}
+/***********************我的收藏************************************/
+.person-wapper-content .getnumbers{
+    color:#0788d3;
+}
+.person-wapper-content .getnumbers:hover{
+    color:#FFA800;
+}
+.person-wapper-content .roomname{
+    color:#9c0404;
+}
+.person-wapper-content .hosptialname{
+    color:#666666;/*#1688ff*/
+}
+.person-wapper-content .professional{
+    color:#333333;
+}
+.person-wapper-content .docname{
+    color:#9c0404;/*282828*/
+}
+.person-wapper-content .hosptialposition{
+    color:#666666;
+}
+.person-wapper-content .docroom{
+    color:#666666;
+}
+/**********上传图片按钮***************/
+.public-upload{
+    background-color: #f7f7f7;
+    border:1px solid #dddddd;
+}
+/****************消息中心***********************/
+.person-wapper-content .messageList-state span{
+    color:#FFA800;
+    border:1px solid #FFA800;
+}
+.person-wapper-content .messageList-time{
+    color:#b1b1b1;
+}
+/****************添加就诊人***********************/
+.person-wapper-content .userinstructions .instructions-head p,.person-wapper-content .userinstructions .instructions-content p{
+    color:#959595;
+}
+
+
+.btn-default {
+    border: 1px solid #800000;
+    background: #800000;
+    color: white;
+}
+
+.btn-default:hover {
+    border-color: #9c0404;
+    background: #9c0404;
+}
+
+.btn-public {
+    border: 1px solid #800000;
+    background: #800000;
+    color: white;
+}
+
+/*.btn-public:hover {
+	border-color: #9c0404;
+	background: #9c0404;
+}*/
+
+.input-default,
+.input-public,
+.input-long {
+    border: 1px solid #DDDDDD;
+    color: #4A4A4A;
+}
+
+.public-pageTitle-border{
+    border-bottom: 1px solid #D2D2D2;
+}
+
+.public-pageTitle-border div .title a{
+    color: #9c0404;
+}
+
+.public-pageTitle-border div .subtitle{
+    color: #B1B1B1;
+}
+
+.public-pageTitle-border div .title a:hover{
+    color: #FFA800;
+}
+.table-common thead tr th {
+    background-color: #D2D2D2;
+    border: 1px solid #DDDDDD;
+}
+
+.table-common tbody tr td {
+    border: 1px solid #DDDDDD;
+}
+
+.table-common tbody tr td a{
+    color: #9c0404;
+}
+
+.table-common tbody tr td a:hover{
+    color: #FFA800;
+}
+
+.table-common tbody tr:nth-child(even) {
+    background-color: #F7F7F7;
+}
+
+.table-common tbody .evenTr {
+    background-color: #F7F7F7;
+}
+/*wsl2017/07/28*/
+.info-introduce h1 .hos-level {
+    background-color: white;
+    color: #FF5400;
+}
+
+.info-introduce .info-content .hos-info-text p a,
+.info-introduce .info-content .info-text a {
+    color: #1689FF;
+}
+
+.info-introduce .info-content .hos-info-text p a:hover {
+    color: #FFA800;
+}
+
+.info-introduce .docinfo-content .info-text p,
+.info-introduce .info-content .hos-info-text p {
+    color: #B1B1B1;
+}
+
+.info-introduce .info-content .hos-info-text p span {
+    color: #4a4a4a;
+}
+
+.tab-contain {
+    border: 0;
+}
+
+.tab-switch ul .hover {
+    background: #E9F4FF;
+    border-color: #E9F4FF;
+}
+
+.tab-switch {
+    border-bottom: 2px solid #800000;
+}
+
+.tab-switch ul {
+    display: inline-block;
+}
+
+.tab-switch ul li {
+    border: 1px solid #D2D2D2;
+}
+
+.tab-switch ul .active {
+    background-color: #800000 !important;   /*lizimo 2017/08/30*/
+    border-color: #800000;
+    color: white;
+    transition: background 1s;
+    -ms-transition: background 1s;
+    -moz-transition: background 1s;
+    -webkit-transition: background 1s;
+    -o-transition: background 1s;
+}
+
+.tab-contain .tab .tab-name {
+    background: #F0F0F0;
+    border: 1px solid #D2D2D2;
+}
+
+.tab-contain .tab .tab-name .detailName {
+    color: #4A4A4A;
+}
+
+.tab-contain .tab .tab-name .nameinfo {
+    color: #FF5400;
+}
+
+.tab-contain .tab .tab-choose-deptType ul .active,
+.tab-contain .tab .tab-choose-dept ul .active {
+    color: #9c0404;
+}
+
+.tab-contain .tab .tab-choose-deptType,
+.tab-contain .tab .tab-choose-dept,
+.tab-contain .tab .tab-choose-date {
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li .tab-doc-info:hover {
+    background: #E9F4FF;
+    cursor: pointer;
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li .tab-doc-info .doc-text p label,
+.dept-docList ul li a h2 {
+    color: #1689FF;  /*#4a4a4a*/
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li .tab-doc-info .doc-text p span ,
+.dept-docList ul li a p span{
+    color: #666666; /*#B1B1B1*/
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li .tab-doc-info .doc-text p .active {
+    color: #666666;
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li .tab-doc-info .doc-text div {
+    color: #999999; /*#4a4a4a*/
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li table thead tr {
+    background-color: #F0F0F0;
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li table thead tr th {
+    border: 1px solid #DDDDDD;
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li table thead tr .spec {
+    background-color: white;
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li table tbody .active {
+    background-color: #F0F0F0;
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li table tbody td {
+    border: 1px solid #DDDDDD;
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li table tbody .reducible {
+    background: #60AFFF;
+    color: white;
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li table tbody .reducible:hover {
+    background: #FFA800;
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li table tbody .close {
+    color: #DF0606;
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li table tbody .book {
+    color: #B1B1B1;
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li {
+    border-bottom: 1px dotted #D2D2D2;
+}
+
+.tab-contain .tab .tab-doc .tab-choose-doc ul li .clickMore {
+    color: #1689FF;
+}
+
+.newsInfo p {
+    color: #B1B1B1;
+}
+
+.newsInfo-content {
+    border-top: 1px dotted #D2D2D2;
+}
+
+.newsInfo-content p {
+    color: #4A4A4A;
+}
+
+.dept-collect {
+    background: #F7F8FC;
+    border: 1px solid #DDDDDD;
+}
+
+.dept-collect span {
+    color: #FF5400;
+}
+
+.tab-news-main {
+    /*border-bottom: 1px solid #D2D2D2;            2017/8/14 lizimo*/
+}
+
+.tab-news-main .newsList li {
+    border-bottom: 1px dotted #D2D2D2;
+}
+
+.tab-news-main .newsList li .news-other label,
+.tab-news-main .newsList li .news-info span {
+    color: #B1B1B1;
+}
+
+.scheduleTab thead {
+    background: #D2D2D2;
+}
+
+.scheduleTab thead th {
+    border: 1px solid #DDDDDD;
+}
+
+.scheduleTab tbody tr .white {
+    background: white !important;
+}
+
+.scheduleTab tbody td {
+    border: 1px solid #DDDDDD;
+}
+
+.scheduleTab tbody a:hover {
+    color: #FFA800;
+}
+
+.scheduleTab tbody .evenTr {
+    background-color: #F7F7F7;
+}
+
+.scheduleTab tbody tr:nth-child(even) {
+    background-color: #F7F7F7;
+}
+
+
+/*就诊卡余额*/
+
+.priceSpec {
+    font-size: 36px;
+    padding: 0 15px;
+}
+
+.inhos-rightSpec div {
+    color: #B1B1B1;
+}
+
+.colourless {
+    height: 2px;
+    width: 325px;
+    background: #B1B1B1;
+}
+
+.coloured {
+    height: 2px;
+    width: 325px;
+    background: #64BD2E;
+}
+
+.text-green {
+    color: #64BD2E;
+}
+
+.confirm-info .confirm-line .float-right ul .active em {
+    border: 2px solid #e9630a;
+}
+
+.confirm-info .confirm-line .float-right ul li em {
+    color: #666666;
+    border: 1px solid #dcdcdc;
+}
+
+.textb1 {
+    color: #B1B1B1;
+}
+
+
+/*分割虚线*/
+
+.parting-line {
+    border-top: 1px dotted #D2D2D2;
+}
+
+.consumeRecord li {
+    border-bottom: 1px dotted #D2D2D2;
+}
+
+.cosumeInfo {
+    color: #B1B1B1;
+}
+
+.cosumeInfo label span {
+    color: #9c0404;
+    padding: 0;
+}
+
+.greySpan .confirm-info ul li span,
+.parting-line .confirm-info ul li span {
+    color: #999;
+}
+
+.wholeLi .confirm-info ul{
+    margin-top: 0;
+}
+
+.wholeLi .confirm-info ul li{
+    width: 100%;
+}
+
+.doctor-signature{
+    color: #4A4A4A !important;
+}
+
+.commonBlue{
+    color: #9c0404;
+}
+/**********lizimo2017/08/14************/
+.index-nav .nav-bar ul.nav-bar-list>li.actives {
+    background: #720000 !important;
+}
+.index-header .header-function .header-search .search-control .search-btn:hover {
+    background-color:#9c0404;
+}

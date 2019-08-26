@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/doc.min.css">
+    <link rel="stylesheet" href="ztree/zTreeStyle.css">
+    <link rel="stylesheet" href="/Content/css/normalize.css" />
+    <link rel="stylesheet" href="/Content/css/base.css" />
+    <link rel="stylesheet" href="/Content/css/basecolor.css" />
+    <link rel="stylesheet" href="/Content/css/animate.css" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="script/docs.min.js"></script>
+    <script src="ztree/jquery.ztree.all-3.5.min.js"></script>
+    <script src="/Scripts/jquery-1.8.2.js"></script>
+    <script src="/Scripts/jQuery.md5.js"></script>
+    <script src="/Scripts/nav-bar.js"></script>
+    <script src="/Scripts/dialog.js"></script>
+    <script src="/Scripts/page.js"></script>
+    <script src="/Scripts/HB.Framework.js"></script>
+
+    <script src="/Scripts/WdatePicker.js"></script>
+    <script src="/Scripts/public.js"></script>
+    <script src="/Scripts/HB.Regular.js"></script>
+    <script src="/Scripts/publicModel.js"></script>
+    <script src="/Scripts/OrgConfig.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<input type="hidden" id="idc_orgid" value="015d25ea-a9a1-bad2-4a20-c1c388d66557" />
+<input type="hidden" id="idc_channelId" value="00faac31-a9a0-a027-4797-746ebbc98720" />
+<input type="hidden" id="HbManageroot" value="http://1.85.45.235:22123/" />
+<input type="hidden" id="idc_cmsImgUrl" value="http://1.85.45.235:22125/">
+<input type="hidden" id="HospitalId" value="6101000002" />
+<!--header-->
+<div class="index-header">
+    <div class="public-contanier">
+        <div class="header-info">
+            <a href="/Home/Index">
+
+            </a>
+        </div>
+        <div class="header-function">
+            <div class="header-iflogin">
+                <label id="personalWelcome" style="display:none;float:left;">
+                    <span>欢迎<a href="/Personal/AppointmentList"><small id="loginNameShow"></small></a></span>
+                    <span><a href="#" onclick="LoginOut()">退出</a></span>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<!--nav-->
+<div class="index-nav">
+    <div class="public-contanier">
+        <div class="nav-bar">
+            <ul class="nav-bar-list">
+                <li></li>
+
+
+                    <div class="drop-down">
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="nav-login-group">
+            <div class="nav-personal" id="centerButton" style="display:none">
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--content-->
+<section id="bottomStyle">
+
+
+    <script src="/Scripts/sliderbar-index.js"></script>
+    <script src="/Scripts/HB.Regular.js"></script>
+    <style>
+        .register-point {
+            position:relative;
+            display:inline-block;
+            margin-right:5px;
+            font-size:30px;
+            top:-3px;
+        }
+    </style>
+    <!--content-->
+    <div class="content Register">
+        <div class="public-contanier row-header">
+            <div class="float-left">
+                <p class="register-head">挂号记得填写清楚自己的信息更有助于到院治疗</p>
+            </div>
+            <div class="float-right">
+
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="public-contanier">
+            <div class="float-left">
+                <div class="content-left">
+                    <form action="orderresult" method="post">
+                        <label>
+                            <div class="res-hidden">
+                                <img class="res-warning" src="/Content/images/warning.png">
+                                <p class="warning-cont"></p>
+                            </div>
+                        </label><br>
+                        <input type="hidden" name="uid" th:value="${uid}">
+                        <input type="hidden" name="did" th:value="${did}">
+                        <input type="hidden" name="username" th:value="${session.user.getUserrealname()}">
+                        <input type="hidden" name="usersex" th:value="${session.user.getUsersex()}">
+                        <input type="hidden" name="idnum" th:value="${session.user.getIdnum()}">
+                        <div class="forminput">
+                            <span class="res-label">年龄</span>
+                            <input class="res-input" maxlength="16" id="username" name="userage" placeholder="请输入年龄">
+                            <span class="res-attation"><span class="res-spe">*</span>必填</span>
+                        </div><br>
+                        <div class="forminput">
+                            <span class="res-label">可用电话</span>
+                            <input class="res-input" maxlength="16" type="text" name="phone" id="password" placeholder="电话">
+                            <span class="res-attation"><span class="res-spe">*</span>必填</span>
+                        </div><br>
+                        <div class="forminput">
+                            <span class="res-label">预约日期</span>
+                            <input class="res-input" maxlength="16" type="date" name="date" id="passwordParden" placeholder="请输入日期">
+                            <span class="res-attation"><span class="res-spe">*</span>必填，再次输入密码</span>
+                        </div><br>
+                        <div class="res-pro forminput">
+                            <span class="res-label"></span>
+                        </div><br>
+                        <div class="forminput" style="margin-top: -40px;">
+                            <span class="res-label"></span>
+                            <button type="submit" class="res-btn btnAnimate">确认</button>
+                        </div><br>
+                        <input type="hidden" id="RegistIp" value="192.168.10.18" />
+                        <input type="hidden" id="RegistUrl" value="http://www.dyyy120.com:80/Account/Register" />
+                    </form>
+
+                </div>
+            </div>
+            <div class="float-left">
+                <div class="content-right">
+                    <div class="res-mgt">
+                        <p class="content-mgt"><span class="register-point">.</span>已有账号，直接<span class="res-login res-hover"><a href="/Account/Login">登录</a></span></p>
+                        <p><span class="register-point">.</span>证件号已存在，无法注册，请使用<a class="res-hover" href="/Account/FindPassword"><span class="res-findpwd">找回密码</span></a></p>
+                        <p><span class="register-point">.</span>未绑定邮箱请联系医院，进行<span class="res-resetpwd">密码重置</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="index-copyright">
+    <div class="public-contanier">
+
+    </div>
+
+</div>
+<!--go-btn-->
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/Content/css/normalize.css">
+    <link rel="stylesheet" href="/Content/css/base.css">
+    <link rel="stylesheet" href="/Content/css/basecolor.css">
+    <link rel="stylesheet" href="/Content/css/animate.css">
+    <script src="/Scripts/jquery-1.8.2.js"></script>
+    <script src="/Scripts/jQuery.md5.js"></script>
+    <script src="/Scripts/nav-bar.js"></script>
+    <script src="/Scripts/dialog.js"></script>
+    <script src="/Scripts/page.js"></script>
+    <script src="/Scripts/HB.Framework.js"></script>
+
+    <script src="/Scripts/WdatePicker.js"></script><link href="/Scripts/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+    <script src="/Scripts/public.js"></script>
+    <script src="/Scripts/HB.Regular.js"></script>
+    <script src="/Scripts/publicModel.js"></script>
+    <script src="/Scripts/OrgConfig.js"></script>
+    <title>首页</title>
+
+    <script type="text/javascript">
+        var medicalRecord = "0";  //是否启用专病预约标识
+        var weisiteurl = "";
+        var RegistWay = "1";
+        var booktype = "1";
+        var branchtype = "1";
+        var doctorId = "";
+        var departmentIdMaster = "-1";
+
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = [
+                "Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"
+            ];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        if (!IsPC()) {
+            if (weisiteurl != "") {
+                location.href = weisiteurl; //取消注释并填写微站代码
+            }
+
+        }
+
+        function JumpRegist() {
+            if (RegistWay == "1") {
+                window.location.href = 'Register';
+            } else if (RegistWay == "2") {
+                window.location.href = '/Account/PhoneRegister';
+            } else if (RegistWay == "1,2") {
+                window.location.href = '/Account/PhoneRegister';
+            }
+
+        }
+    </script>
+    <style>
+        .index-nav .nav-bar .zbhos-depart > ul > li {
+            width: 220px!important;
+        }
+        #zbdepList_doc .depart-depart>span {
+            width: 120px !important;
+        }
+        #zbdepList_doc .depart-depart>ul>li {
+            width: auto!important;
+        }
+    </style>
+    <style>#BAIDU_DSPUI_FLOWBAR,.adsbygoogle,.ad,div[class^="ad-widsget"],div[id^="div-gpt-ad-"],a[href*="cpro.baidu.com"],a[href*="@"][href*=".exe"],a[href*="/?/"][href*=".exe"],.adpushwin{display:none!important;max-width:0!important;max-height:0!important;overflow:hidden!important;}</style>
+</head>
+<body>
+
+</div>
+
+<div class="index-copyright">
+    <div class="public-contanier">
+        <span class="text">技术支持：<span><a href="http://www.hbjk114.com" target="_blank">IT健康&amp;Java1904大佬部</a></span></span>
+    </div>
+
+</div>
+<!--go-btn-->
+
+
+<script src="/ScriptActions/Home/Index.js"></script>
+
+
+<script>
+    $(function () {
+        if (medicalRecord == 1) {
+            $(".J-li-zbyy").show();
+            $(".J-li-jzxz").hide();
+        } else {
+            $(".J-li-jzxz").show();
+            $(".J-li-zbyy").hide();
+        }
+        if (RegistWay == "1") {
+            $("#updateemail").attr("style", "display:");
+        } else if (RegistWay == "2") {
+            $("#updatemobile").attr("style", "display:");
+        } else if (RegistWay == "1,2") {
+            $("#updateemail1").attr("style", "display:");
+            $("#updatemobile").attr("style", "display:");
+        }
+        $.each($(".nav-bar ul li a"), function () {
+            if (window.location.pathname == "/") {
+                $(".nav-bar ul li").eq(0).addClass("actives");
+            }
+            if ($(this).attr("href") == window.location.pathname) {
+                $(this).parent().addClass("actives");
+            }
+        });
+        $("#nav-bar-search ul li,#nav-bar-pay ul li").find("a").each(function () {
+            $(this).click(function () {
+                if (window.sessionStorage.getItem("PassportId") != "" && window.sessionStorage.getItem("PassportId") != null && window.sessionStorage.getItem("PassportId") != "undefined") {
+                    window.location = $(this).attr("class");
+                    console.log($(this).attr("class"));
+                } else if ($(this).attr("id") == "pagesize" || $(this).attr("id") == "blocksize" || $(this).attr("id") == "sizeSearch") {
+                    window.location = $(this).attr("class");
+                    console.log($(this).attr("class"));
+                } else {
+                    createLogin();
+                    console.log($(this).attr("class"));
+                }
+            });
+        });
+        $(".goto-icon").mouseover(function () {
+            $(this).attr("src", "/Content/images/round1.png");
+        }).mouseleave(function () {
+            $(this).attr("src", "/Content/images/round.png");
+        });
+    });
+</script>
+<div id="IDC_AJAXMASK" style="display: none;"></div><div id="IDC_LOADING" style="display: none;">
+
+</div>
+<div id="login" class="mask-shadow is-visible"><div class="bgshadow">
+
+</div>  <div class="mydialog mydialogs animated bounceInDown" style="margin-top: -178.5px;">
+    <div class="login">
+        <h4>登录</h4>
+        <form class="" name="form1" id="form1" method="post" action="allmanager">
+            <div class="warnings" style="display: none;">
+                <img class="res-warning" src="/Content/images/warning.png">
+                <p class="warning-cont"></p>
+            </div>
+            <div class="controls">
+
+                <input class="largeInput" name="doctorName" id="doctorName" maxlength="50" placeholder="用户名/身份证号/邮箱" type="text" value="">
+            </div>
+            <div class="controls">
+
+                <input class="largeInput" maxlength="16" name="doctorPwd" id="doctorPwd" placeholder="密码" type="password">
+            </div>
+            <div class="controls">
+                <div class="specil-controls">
+                        <span class="float-left">
+                            <a class="login-hover" href="/Account/FindPassword">忘记密码？</a>
+                        </span>
+
+                </div>
+                <div class="controls">
+                    <button class="login-btn btnAnimate" value="登录"  type="submit">登录</button>
+                </div>
+        </form>
+    </div>
+</div>
+</div>
+</body>
+</html>

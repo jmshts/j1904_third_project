@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/Content/css/normalize.css" />
+    <link rel="stylesheet" href="/Content/css/base.css" />
+    <link rel="stylesheet" href="/Content/css/basecolor.css" />
+    <link rel="stylesheet" href="/Content/css/animate.css" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/doc.min.css">
+    <link rel="stylesheet" href="ztree/zTreeStyle.css">
+    <script src="/Scripts/jquery-1.8.2.js"></script>
+    <script src="/Scripts/jQuery.md5.js"></script>
+    <script src="/Scripts/nav-bar.js"></script>
+    <script src="/Scripts/dialog.js"></script>
+    <script src="/Scripts/page.js"></script>
+    <script src="/Scripts/HB.Framework.js"></script>
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="script/docs.min.js"></script>
+    <script src="ztree/jquery.ztree.all-3.5.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+    <script src="script/docs.min.js">
+
+    <script src="/Scripts/WdatePicker.js"></script>
+    <script src="/Scripts/public.js"></script>
+    <script src="/Scripts/HB.Regular.js"></script>
+    <script src="/Scripts/publicModel.js"></script>
+    <script src="/Scripts/OrgConfig.js"></script>
+    <title>医生导航</title>
+
+    <script type="text/javascript">
+        var medicalRecord = "0";  //是否启用专病预约标识
+        var weisiteurl = "";
+        var RegistWay = "1";
+        var booktype = "1";
+        var branchtype = "1";
+        var doctorId = "";
+        var departmentIdMaster = "-1";
+
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = [
+                "Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"
+            ];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        if (!IsPC()) {
+            if (weisiteurl != "") {
+                location.href = weisiteurl; //取消注释并填写微站代码
+            }
+
+        }
+
+        function JumpRegist() {
+            if (RegistWay == "1") {
+                window.location.href = '/Account/Register';
+            } else if (RegistWay == "2") {
+                window.location.href = '/Account/PhoneRegister';
+            } else if (RegistWay == "1,2") {
+                window.location.href = '/Account/PhoneRegister';
+            }
+
+        }
+    </script>
+    <style>
+        .index-nav .nav-bar .zbhos-depart > ul > li {
+            width: 220px!important;
+        }
+        #zbdepList_doc .depart-depart>span {
+            width: 120px !important;
+        }
+        #zbdepList_doc .depart-depart>ul>li {
+            width: auto!important;
+        }
+    </style>
+</head>
+<body>
+<input type="hidden" id="idc_orgid" value="015d25ea-a9a1-bad2-4a20-c1c388d66557" />
+<input type="hidden" id="idc_channelId" value="00faac31-a9a0-a027-4797-746ebbc98720" />
+<input type="hidden" id="HbManageroot" value="http://1.85.45.235:22123/" />
+<input type="hidden" id="idc_cmsImgUrl" value="http://1.85.45.235:22125/">
+<input type="hidden" id="HospitalId" value="6101000002" />
+<!--header-->
+<div class="index-header">
+    <div class="public-contanier">
+        <div class="header-info">
+            <a href="/Home/Index">
+            </a>
+        </div>
+        <div class="header-function">
+            <div class="header-iflogin">
+                <label id="personalWelcome" style="display:none;float:left;">
+                    <span>欢迎<a href="/Personal/AppointmentList"><small id="loginNameShow"></small></a></span>
+                    <span><a href="#" onclick="LoginOut()">退出</a></span>
+                </label>
+
+            </div>
+            <div class="header-search">
+                <div class="search-control">
+                    <div class="search-type">
+                        <div class="select_box">
+                            <span class="select_txt">科室</span>
+                            <input id="select_value" type="hidden" value="search_dep" />
+                            <a class="selet_open"><b></b></a>
+                            <div class="option">
+                                <a id="search_dep">科室</a>
+                                <a id="search_doc">医生</a>
+                            </div>
+                        </div>
+                        <br clear="all">
+                    </div>
+                    <div class="search-value">
+                        <form action="/like">
+                            <input id="searchText" type="text" value="" name="sql" placeholder="请输入科室" />
+                            <button type="submit" value="搜索">class="btn btn-default search-btn mod_select"</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<!--nav-->
+<div class="index-nav">
+    <div class="public-contanier">
+        <div class="nav-bar">
+            <ul class="nav-bar-list">
+                <li><a href="/">首页</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-login-group">
+            <div class="nav-personal" id="centerButton" style="display:none">
+                <a href="/Personal/AppointmentList">
+                    个人中心
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--content-->
+<section id="bottomStyle">
+
+
+    <script src="/Scripts/sliderbar-index.js"></script>
+
+    <!--content-->
+    <div class="content">
+        <div class="public-contanier">
+            <!--breadcrumbs-->
+            <div class="public-pageTitle">
+                <h1>医生列表</h1>
+            </div>
+        </div>
+        <div class="public-contanier">
+            <div class="panel-box-middle" style="min-height:500px;">
+                <div class="panel-header">
+                   <h2>医生</h2>
+                    <form action="/neworder">
+                        <table class="table  table-bordered">
+                            <thead>
+                            <tr >
+                                <th width="30">#</th>
+                                <th>姓名</th>
+                                <th>电话</th>
+                                <th>科室</th>
+                                <th>简介</th>
+                                <th width="100">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr th:each="doctor:${doctorList}">
+                                <td th:text="${doctor.did}"></td>
+                                <td th:text="${doctor.doctorrealname}"></td>
+                                <td th:text="${doctor.phonenum}"></td>
+                                <td th:text="${doctor.department}"></td>
+                                <td th:text="${doctor.info}"></td>
+                                <td>
+                                    <a type="button" id="assignRole" class="btn btn-success btn-xs" th:href="@{neworder(did=${doctor.did},uid=${session.user.getUid()})}" >挂号<i class=" glyphicon glyphicon-check"></i></a>
+                                </td>
+                            </tr>
+
+
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="6" align="center">
+                                    <a class="btn btn-default" th:href="@{docschedule(page=1)}">首页</a>
+                                    <a class="btn btn-default" th:href="@{docschedule(page=${currentpage-1})}">上一页</a>
+                                    <a class="btn btn-default" th:href="@{docschedule(page=${currentpage+1})}">下一页</a>
+                                    <a class="btn btn-default" th:href="@{docschedule(page=${maxpage})}">末页</a>
+                                </td>
+                            </tr>
+
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+<!--                <img id="clinicList" style="position:absolute;z-index:9999;width:1200px;height:370px;"/>-->
+
+<!--                <div class="panel-body">-->
+<!--                    <div id="docList">-->
+<!--                        -->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            // hover效果
+            $(".breadcrumbs ul .choose").siblings().hover(function () {
+                    $(this).find("a").addClass("hover");
+                },
+                function () {
+                    $(this).find("a").removeClass("hover");
+                });
+        });
+    </script>
+
+</section>
+
+<div class="index-copyright">
+    <div class="public-contanier">
+    </div>
+
+</div>
+<!--go-btn-->
+
+</body>
+<script src="/ScriptActions/Appointment/DocSchedule.js"></script>
+
+</html>
+<script>
+    $(function () {
+        if (medicalRecord == 1) {
+            $(".J-li-zbyy").show();
+            $(".J-li-jzxz").hide();
+        } else {
+            $(".J-li-jzxz").show();
+            $(".J-li-zbyy").hide();
+        }
+        if (RegistWay == "1") {
+            $("#updateemail").attr("style", "display:");
+        } else if (RegistWay == "2") {
+            $("#updatemobile").attr("style", "display:");
+        } else if (RegistWay == "1,2") {
+            $("#updateemail1").attr("style", "display:");
+            $("#updatemobile").attr("style", "display:");
+        }
+        $.each($(".nav-bar ul li a"), function () {
+            if (window.location.pathname == "/") {
+                $(".nav-bar ul li").eq(0).addClass("actives");
+            }
+            if ($(this).attr("href") == window.location.pathname) {
+                $(this).parent().addClass("actives");
+            }
+        });
+        $("#nav-bar-search ul li,#nav-bar-pay ul li").find("a").each(function () {
+            $(this).click(function () {
+                if (window.sessionStorage.getItem("PassportId") != "" && window.sessionStorage.getItem("PassportId") != null && window.sessionStorage.getItem("PassportId") != "undefined") {
+                    window.location = $(this).attr("class");
+                    console.log($(this).attr("class"));
+                } else if ($(this).attr("id") == "pagesize" || $(this).attr("id") == "blocksize" || $(this).attr("id") == "sizeSearch") {
+                    window.location = $(this).attr("class");
+                    console.log($(this).attr("class"));
+                } else {
+                    createLogin();
+                    console.log($(this).attr("class"));
+                }
+            });
+        });
+        $(".goto-icon").mouseover(function () {
+            $(this).attr("src", "/Content/images/round1.png");
+        }).mouseleave(function () {
+            $(this).attr("src", "/Content/images/round.png");
+        });
+    });
+</script>

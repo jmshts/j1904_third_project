@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.mapper.TbUserMapper">
+    <resultMap id="UserMap" type="com.sy.pojo.TbUser">
+        <id property="uid" column="uId"/>
+        <result property="username" column="userName"/>
+        <result property="userpwd" column="userPwd"/>
+        <result property="userrealname" column="userRealName"/>
+        <result property="idnum" column="idNum"/>
+        <result property="phone" column="phone"/>
+    </resultMap>
+
+<!--    登录时，通过username获取整个user信息-->
+    <select id="findUserInfoByUserName" parameterType="com.sy.pojo.TbUser" resultMap="UserMap">
+        select
+        *
+        from
+        tb_user
+        where
+        userName = #{userName}
+    </select>
+<!--    通过username获取完全的user权限集合-->
+    <select id="findPermissionsByUserName" parameterType="string" resultType="com.sy.pojo.TbPermission">
+        select
+        p.*
+        from
+        tb_user u,
+        user_role_mapping ur,
+        tb_role r,
+        role_per_mapping rp,
+        tb_permission p
+        where
+        u.uid=ur.uid and
+        ur.rid=r.rid and
+        r.rid=rp.rid and
+        rp.pid =p.id and
+        u.userName=#{userName}
+    </select>
+<!--    创建一个新的user账号-->
+    <insert id="creatNewUser" parameterType="com.sy.pojo.TbUser">
+        insert 
+        into 
+        tb_user
+        values 
+        (#{uid},
+        #{username},
+        #{userpwd},
+        #{userrealname},
+        #{usersex},
+        #{useremail},
+        #{idnum},
+        #{phone})
+    </insert>
+<!--    创建user_role_mapping-->
+    <insert id="creatUserRoleMapping" parameterType="com.sy.pojo.UserRoleMapperKey">
+        insert
+         into
+         user_role_mapping
+         values
+         (#{uid},
+         #{rid});
+    </insert>
+</mapper>

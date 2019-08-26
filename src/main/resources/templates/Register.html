@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/Content/css/normalize.css" />
+    <link rel="stylesheet" href="/Content/css/base.css" />
+    <link rel="stylesheet" href="/Content/css/basecolor.css" />
+    <link rel="stylesheet" href="/Content/css/animate.css" />
+    <script src="/Scripts/jquery-1.8.2.js"></script>
+    <script src="/Scripts/jQuery.md5.js"></script>
+    <script src="/Scripts/nav-bar.js"></script>
+    <script src="/Scripts/dialog.js"></script>
+    <script src="/Scripts/page.js"></script>
+    <script src="/Scripts/HB.Framework.js"></script>
+
+    <script src="/Scripts/WdatePicker.js"></script>
+    <script src="/Scripts/public.js"></script>
+    <script src="/Scripts/HB.Regular.js"></script>
+    <script src="/Scripts/publicModel.js"></script>
+    <script src="/Scripts/OrgConfig.js"></script>
+    <title>注册</title>
+
+    <script type="text/javascript">
+        var medicalRecord = "0";  //是否启用专病预约标识
+        var weisiteurl = "";
+        var RegistWay = "1";
+        var booktype = "1";
+        var branchtype = "1";
+        var doctorId = "";
+        var departmentIdMaster = "-1";
+
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = [
+                "Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"
+            ];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        if (!IsPC()) {
+            if (weisiteurl != "") {
+                location.href = weisiteurl; //取消注释并填写微站代码
+            }
+
+        }
+
+        function JumpRegist() {
+            if (RegistWay == "1") {
+                window.location.href = '/Account/Register';
+            } else if (RegistWay == "2") {
+                window.location.href = '/Account/PhoneRegister';
+            } else if (RegistWay == "1,2") {
+                window.location.href = '/Account/PhoneRegister';
+            }
+
+        }
+    </script>
+    <style>
+        .index-nav .nav-bar .zbhos-depart > ul > li {
+            width: 220px!important;
+        }
+        #zbdepList_doc .depart-depart>span {
+            width: 120px !important;
+        }
+        #zbdepList_doc .depart-depart>ul>li {
+            width: auto!important;
+        }
+    </style>
+</head>
+<body>
+<input type="hidden" id="idc_orgid" value="015d25ea-a9a1-bad2-4a20-c1c388d66557" />
+<input type="hidden" id="idc_channelId" value="00faac31-a9a0-a027-4797-746ebbc98720" />
+<input type="hidden" id="HbManageroot" value="http://1.85.45.235:22123/" />
+<input type="hidden" id="idc_cmsImgUrl" value="http://1.85.45.235:22125/">
+<input type="hidden" id="HospitalId" value="6101000002" />
+<!--header-->
+<div class="index-header">
+    <div class="public-contanier">
+        <div class="header-info">
+            <a href="/Home/Index">
+
+            </a>
+        </div>
+        <div class="header-function">
+            <div class="header-iflogin">
+                <label id="personalWelcome" style="display:none;float:left;">
+                    <span>欢迎<a href="/Personal/AppointmentList"><small id="loginNameShow"></small></a></span>
+                    <span><a href="#" onclick="LoginOut()">退出</a></span>
+                </label>
+
+            </div>
+            <div class="header-search">
+                <div class="search-control">
+                    <div class="search-type">
+                        <div class="select_box">
+                            <span class="select_txt">科室</span>
+                            <input id="select_value" type="hidden" value="search_dep" />
+                            <a class="selet_open"><b></b></a>
+                            <div class="option">
+                                <a id="search_dep">科室</a>
+                                <a id="search_doc">医生</a>
+                            </div>
+                        </div>
+                        <br clear="all">
+                    </div>
+                    <div class="search-value">
+                        <input id="searchText" type="text" value="" placeholder="请输入文字" />
+                    </div>
+                    <div class="btn btn-default search-btn mod_select" onclick="topSearch()">
+                        搜索
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<!--nav-->
+<div class="index-nav">
+    <div class="public-contanier">
+        <div class="nav-bar">
+            <ul class="nav-bar-list">
+                <li><a href="/Home/Index">首页</a></li>
+                <li id="nav-bar-yuyue">
+                    <a href="/Appointment/HospitalIndex">预约挂号</a>
+                    <div class="drop-down">
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="nav-login-group">
+            <div class="nav-personal" id="centerButton" style="display:none">
+                <a href="/Personal/AppointmentList">
+                    个人中心
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--content-->
+<section id="bottomStyle">
+
+
+    <script src="/Scripts/sliderbar-index.js"></script>
+    <script src="/Scripts/HB.Regular.js"></script>
+    <style>
+        .register-point {
+            position:relative;
+            display:inline-block;
+            margin-right:5px;
+            font-size:30px;
+            top:-3px;
+        }
+    </style>
+    <!--content-->
+    <div class="content Register">
+        <div class="public-contanier row-header">
+            <div class="float-left">
+                <p class="register-head">注册</p>
+            </div>
+            <div class="float-right">
+                <div id="tag_username_regist" style="padding: 30px 15px 0; width :350px; display :none; text-align :center">
+                    <a href="/Account/PhoneRegister" style="color:#1689ff;">返回手机注册！</a>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="public-contanier">
+            <div class="float-left">
+                <div class="content-left">
+                    <form action="newpatient" method="post">
+                        <label>
+                            <div class="res-hidden">
+                                <img class="res-warning" src="/Content/images/warning.png">
+                                <p class="warning-cont"></p>
+                            </div>
+                        </label><br>
+                        <div class="forminput">
+                            <span class="res-label">用户名</span>
+                            <input class="res-input" maxlength="16" id="username" name="username" placeholder="请输入用户名">
+                            <span class="res-attation"><span class="res-spe">*</span>必填，6-16位数字、字母组合，且以字母开头</span>
+                        </div><br>
+                        <div class="forminput">
+                            <span class="res-label">设置密码</span>
+                            <input class="res-input" maxlength="16" type="password" name="userpwd" id="password" placeholder="请输入密码">
+                            <span class="res-attation"><span class="res-spe">*</span>必填，长度为6-16个字母、数字组合，不能为纯数字</span>
+                        </div><br>
+                        <div class="forminput">
+                            <span class="res-label">确认密码</span>
+                            <input class="res-input" maxlength="16" type="password" name="passwordParden" id="passwordParden" placeholder="请输入确认密码">
+                            <span class="res-attation"><span class="res-spe">*</span>必填，再次输入密码</span>
+                        </div><br>
+                        <div class="forminput">
+                            <span class="res-label">姓名</span>
+                            <input class="res-input" maxlength="20" id="name" name="userrealname" placeholder="请输入真实姓名">
+                            <span class="res-attation res-long"><span class="res-spe">*</span>必填，必须是用户真实姓名</span>
+                        </div><br>
+                        <div class="forminput">
+                            <span class="res-label">性别</span>
+<!--                            <input class="res-input" maxlength="20" type="se" value="" id="name" name="usersex" placeholder="请输入您的性别">-->
+                            <select name="usersex" class="form-control" placeholder=".col-xs-2">
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+                            <span class="res-attation res-long"><span class="res-spe">*</span>必填</span>
+                        </div><br>
+                        <div class="forminput">
+                            <span class="res-label">邮箱</span>
+                            <input class="res-input" maxlength="20" type="email" id="name" name="useremail" placeholder="请输入邮箱">
+                            <span class="res-attation res-long"><span class="res-spe">*</span>必填</span>
+                        </div><br>
+                        <div class="forminput">
+                            <span class="res-label">身份证号</span>
+                            <input class="res-input" maxlength="18" id="idCard" name="idnum" placeholder="请输入身份证号">
+                            <span class="res-attation"><span class="res-spe">*</span>必填，18位数字和字母，不能以字母开头</span>
+                        </div><br>
+                        <div class="forminput">
+                            <span class="res-label">手机号</span>
+                            <input class="res-input" maxlength="11" id="phoneNumber" name="phone" placeholder="请输入真实手机号">
+                            <span class="res-attation"><span class="res-spe">*</span>必填，11位纯数字</span>
+                        </div><br>
+                        <div class="res-pro forminput">
+                            <span class="res-label"></span>
+                        </div><br>
+                        <div class="forminput" style="margin-top: -40px;">
+                            <span class="res-label"></span>
+                            <button type="submit" class="res-btn btnAnimate">注册</button>
+                        </div><br>
+                        <input type="hidden" id="RegistIp" value="192.168.10.18" />
+                        <input type="hidden" id="RegistUrl" value="http://www.dyyy120.com:80/Account/Register" />
+                    </form>
+
+                </div>
+            </div>
+            <div class="float-left">
+                <div class="content-right">
+                    <div class="res-mgt">
+                        <p class="content-mgt"><span class="register-point">.</span>已有账号，直接<span class="res-login res-hover"><a href="/Account/Login">登录</a></span></p>
+                        <p><span class="register-point">.</span>证件号已存在，无法注册，请使用<a class="res-hover" href="/Account/FindPassword"><span class="res-findpwd">找回密码</span></a></p>
+                        <p><span class="register-point">.</span>未绑定邮箱请联系医院，进行<span class="res-resetpwd">密码重置</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="index-copyright">
+    <div class="public-contanier">
+
+    </div>
+
+</div>
+<!--go-btn-->
+
+</body>
+<script src="/ScriptActions/Account/Register.js"></script>
+
+</html>
+<script>
+    $(function () {
+        if (medicalRecord == 1) {
+            $(".J-li-zbyy").show();
+            $(".J-li-jzxz").hide();
+        } else {
+            $(".J-li-jzxz").show();
+            $(".J-li-zbyy").hide();
+        }
+        if (RegistWay == "1") {
+            $("#updateemail").attr("style", "display:");
+        } else if (RegistWay == "2") {
+            $("#updatemobile").attr("style", "display:");
+        } else if (RegistWay == "1,2") {
+            $("#updateemail1").attr("style", "display:");
+            $("#updatemobile").attr("style", "display:");
+        }
+        $.each($(".nav-bar ul li a"), function () {
+            if (window.location.pathname == "/") {
+                $(".nav-bar ul li").eq(0).addClass("actives");
+            }
+            if ($(this).attr("href") == window.location.pathname) {
+                $(this).parent().addClass("actives");
+            }
+        });
+        $("#nav-bar-search ul li,#nav-bar-pay ul li").find("a").each(function () {
+            $(this).click(function () {
+                if (window.sessionStorage.getItem("PassportId") != "" && window.sessionStorage.getItem("PassportId") != null && window.sessionStorage.getItem("PassportId") != "undefined") {
+                    window.location = $(this).attr("class");
+                    console.log($(this).attr("class"));
+                } else if ($(this).attr("id") == "pagesize" || $(this).attr("id") == "blocksize" || $(this).attr("id") == "sizeSearch") {
+                    window.location = $(this).attr("class");
+                    console.log($(this).attr("class"));
+                } else {
+                    createLogin();
+                    console.log($(this).attr("class"));
+                }
+            });
+        });
+        $(".goto-icon").mouseover(function () {
+            $(this).attr("src", "/Content/images/round1.png");
+        }).mouseleave(function () {
+            $(this).attr("src", "/Content/images/round.png");
+        });
+    });
+</script>
