@@ -194,7 +194,7 @@
                                 <td th:text="${doctor.department}"></td>
                                 <td th:text="${doctor.info}"></td>
                                 <td>
-                                    <a type="button" id="assignRole" class="btn btn-success btn-xs" th:href="@{neworder(did=${doctor.did}}" >挂号<i class=" glyphicon glyphicon-check"></i></a>
+                                    <a type="button" id="assignRole" class="btn btn-success btn-xs" th:href="@{neworder(did=${doctor.did},uid=${session.user.getUid()})}" >挂号<i class=" glyphicon glyphicon-check"></i></a>
                                 </td>
                             </tr>
 

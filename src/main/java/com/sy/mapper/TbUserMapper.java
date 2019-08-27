@@ -40,6 +40,7 @@ public interface TbUserMapper{
      * @return
      */
     public int creatUserRoleMapping(UserRoleMapperKey userRoleMapperKey);
+    public List<TbUser> loadalluser();
 
 }
 
